@@ -5930,3 +5930,63 @@ Swashbuckle.AspNetCore.SwaggerGen.SwaggerGeneratorException: Failed to generate 
 2024-08-11 14:55:24.251 +03:30 [DBG] Connection id "0HN5PV10V6C8J" received FIN.
 2024-08-11 14:55:24.256 +03:30 [DBG] Connection id "0HN5PV10V6C8J" sending FIN because: "The Socket transport's send loop completed gracefully."
 2024-08-11 14:55:24.263 +03:30 [DBG] Connection id "0HN5PV10V6C8J" disconnecting.
+2024-08-11 15:23:49.360 +03:30 [DBG] Registered model binder providers, in the following order: ["Microsoft.AspNetCore.Mvc.Versioning.ApiVersionModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.BinderTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ServicesModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.BodyModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.HeaderModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FloatingPointTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.EnumTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.DateTimeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.SimpleTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.TryParseModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CancellationTokenModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ByteArrayModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FormFileModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FormCollectionModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.KeyValuePairModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.DictionaryModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ArrayModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CollectionModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ComplexObjectModelBinderProvider"]
+2024-08-11 15:23:49.496 +03:30 [INF] Starting web host
+2024-08-11 15:23:49.505 +03:30 [DBG] Hosting starting
+2024-08-11 15:23:49.872 +03:30 [INF] Now listening on: http://localhost:5041
+2024-08-11 15:23:49.875 +03:30 [DBG] Loaded hosting startup assembly RealEstateService
+2024-08-11 15:23:49.878 +03:30 [DBG] Loaded hosting startup assembly Microsoft.AspNetCore.Watch.BrowserRefresh
+2024-08-11 15:23:49.881 +03:30 [DBG] Loaded hosting startup assembly Microsoft.WebTools.BrowserLink.Net
+2024-08-11 15:23:49.885 +03:30 [INF] Application started. Press Ctrl+C to shut down.
+2024-08-11 15:23:49.888 +03:30 [INF] Hosting environment: Development
+2024-08-11 15:23:49.891 +03:30 [INF] Content root path: D:\Projects\Personal\Real State\RealEstateAPI\RealEstateAPI\RealEstateService
+2024-08-11 15:23:49.893 +03:30 [DBG] Hosting started
+2024-08-11 15:23:50.241 +03:30 [DBG] Connection id "0HN5PVH1UNR1C" accepted.
+2024-08-11 15:23:50.241 +03:30 [DBG] Connection id "0HN5PVH1UNR1D" accepted.
+2024-08-11 15:23:50.247 +03:30 [DBG] Connection id "0HN5PVH1UNR1C" received FIN.
+2024-08-11 15:23:50.254 +03:30 [DBG] Connection id "0HN5PVH1UNR1D" started.
+2024-08-11 15:23:50.247 +03:30 [DBG] Connection id "0HN5PVH1UNR1D" received FIN.
+2024-08-11 15:23:50.252 +03:30 [DBG] Connection id "0HN5PVH1UNR1C" started.
+2024-08-11 15:23:50.281 +03:30 [DBG] Connection id "0HN5PVH1UNR1C" sending FIN because: "The Socket transport's send loop completed gracefully."
+2024-08-11 15:23:50.281 +03:30 [DBG] Connection id "0HN5PVH1UNR1D" sending FIN because: "The Socket transport's send loop completed gracefully."
+2024-08-11 15:23:50.290 +03:30 [DBG] Connection id "0HN5PVH1UNR1C" disconnecting.
+2024-08-11 15:23:50.292 +03:30 [DBG] Connection id "0HN5PVH1UNR1D" disconnecting.
+2024-08-11 15:23:50.301 +03:30 [DBG] Connection id "0HN5PVH1UNR1C" stopped.
+2024-08-11 15:23:50.301 +03:30 [DBG] Connection id "0HN5PVH1UNR1D" stopped.
+2024-08-11 15:23:51.943 +03:30 [DBG] Connection id "0HN5PVH1UNR1E" accepted.
+2024-08-11 15:23:51.991 +03:30 [DBG] Connection id "0HN5PVH1UNR1E" started.
+2024-08-11 15:23:52.095 +03:30 [INF] Request starting HTTP/1.1 GET http://localhost:5041/swagger/index.html - null null
+2024-08-11 15:23:52.930 +03:30 [DBG] Wildcard detected, all requests with hosts will be allowed.
+2024-08-11 15:23:53.031 +03:30 [DBG] No candidates found for the request path '/swagger/index.html'
+2024-08-11 15:23:53.041 +03:30 [DBG] Request did not match any endpoints
+2024-08-11 15:23:53.092 +03:30 [DBG] The request path /swagger/index.html does not match an existing file
+2024-08-11 15:23:53.574 +03:30 [DBG] Response markup is scheduled to include Browser Link script injection.
+2024-08-11 15:23:53.609 +03:30 [DBG] Response markup is scheduled to include browser refresh script injection.
+2024-08-11 15:23:53.890 +03:30 [DBG] Response markup was updated to include Browser Link script injection.
+2024-08-11 15:23:53.987 +03:30 [DBG] Connection id "0HN5PVH1UNR1F" accepted.
+2024-08-11 15:23:54.611 +03:30 [DBG] Response markup was updated to include browser refresh script injection.
+2024-08-11 15:23:55.355 +03:30 [DBG] Connection id "0HN5PVH1UNR1G" accepted.
+2024-08-11 15:23:55.358 +03:30 [DBG] Connection id "0HN5PVH1UNR1E" completed keep alive response.
+2024-08-11 15:23:55.367 +03:30 [DBG] Connection id "0HN5PVH1UNR1F" started.
+2024-08-11 15:23:55.367 +03:30 [DBG] Connection id "0HN5PVH1UNR1H" accepted.
+2024-08-11 15:23:55.367 +03:30 [DBG] Connection id "0HN5PVH1UNR1G" started.
+2024-08-11 15:23:55.508 +03:30 [INF] Request starting HTTP/1.1 GET http://localhost:5041/_framework/aspnetcore-browser-refresh.js - null null
+2024-08-11 15:23:55.508 +03:30 [INF] Request finished HTTP/1.1 GET http://localhost:5041/swagger/index.html - 200 null text/html;charset=utf-8 3433.4526ms
+2024-08-11 15:23:55.511 +03:30 [DBG] Connection id "0HN5PVH1UNR1H" started.
+2024-08-11 15:23:55.514 +03:30 [INF] Request starting HTTP/1.1 GET http://localhost:5041/_vs/browserLink - null null
+2024-08-11 15:23:55.530 +03:30 [DBG] Connection id "0HN5PVH1UNR1F" completed keep alive response.
+2024-08-11 15:23:55.537 +03:30 [INF] Request starting HTTP/1.1 GET http://localhost:5041/swagger/index.js - null null
+2024-08-11 15:23:55.565 +03:30 [INF] Request finished HTTP/1.1 GET http://localhost:5041/_framework/aspnetcore-browser-refresh.js - 200 13769 application/javascript; charset=utf-8 57.2705ms
+2024-08-11 15:23:55.632 +03:30 [DBG] No candidates found for the request path '/swagger/index.js'
+2024-08-11 15:23:55.658 +03:30 [DBG] Request did not match any endpoints
+2024-08-11 15:23:55.663 +03:30 [DBG] The request path /swagger/index.js does not match an existing file
+2024-08-11 15:23:55.671 +03:30 [DBG] Connection id "0HN5PVH1UNR1H" completed keep alive response.
+2024-08-11 15:23:55.675 +03:30 [INF] Request finished HTTP/1.1 GET http://localhost:5041/swagger/index.js - 200 null application/javascript;charset=utf-8 138.4355ms
+2024-08-11 15:23:55.959 +03:30 [DBG] Connection id "0HN5PVH1UNR1G" completed keep alive response.
+2024-08-11 15:23:55.983 +03:30 [INF] Request finished HTTP/1.1 GET http://localhost:5041/_vs/browserLink - 200 null text/javascript; charset=UTF-8 469.0681ms
+2024-08-11 15:23:56.322 +03:30 [INF] Request starting HTTP/1.1 GET http://localhost:5041/swagger/v1/swagger.json - null null
+2024-08-11 15:23:56.473 +03:30 [DBG] No candidates found for the request path '/swagger/v1/swagger.json'
+2024-08-11 15:23:56.551 +03:30 [DBG] Request did not match any endpoints
+2024-08-11 15:23:56.567 +03:30 [DBG] The request path /swagger/v1/swagger.json does not match an existing file
+2024-08-11 15:23:57.226 +03:30 [DBG] Connection id "0HN5PVH1UNR1G" completed keep alive response.
+2024-08-11 15:23:57.231 +03:30 [INF] Request finished HTTP/1.1 GET http://localhost:5041/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 909.3382ms
