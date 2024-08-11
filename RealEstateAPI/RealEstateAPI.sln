@@ -5,11 +5,11 @@ VisualStudioVersion = 17.9.34728.123
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RealEstateService", "RealEstateService\RealEstateService.csproj", "{EE6A97A4-507C-4922-BC8C-C0272596BCC4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RealEstateCore", "RealEstateCore\RealEstateCore.csproj", "{1E560C04-DFC2-4267-8599-862833A496CB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RealEstateCore", "RealEstateCore\RealEstateCore.csproj", "{1E560C04-DFC2-4267-8599-862833A496CB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RealEstateApplication", "RealEstateApplication\RealEstateApplication.csproj", "{F2CD5924-CF41-42B0-9D47-F1BE51AD7FBE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RealEstateApplication", "RealEstateApplication\RealEstateApplication.csproj", "{F2CD5924-CF41-42B0-9D47-F1BE51AD7FBE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RealEstateInfrastructure", "RealEstateInfrastructure\RealEstateInfrastructure.csproj", "{8FCF1A22-767C-4E43-BDE7-6CC110EB3892}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RealEstateInfrastructure", "RealEstateInfrastructure\RealEstateInfrastructure.csproj", "{8FCF1A22-767C-4E43-BDE7-6CC110EB3892}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
