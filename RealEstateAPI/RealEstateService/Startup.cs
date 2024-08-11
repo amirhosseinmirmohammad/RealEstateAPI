@@ -77,7 +77,7 @@ namespace RealEstateService
             {
                 string connectionString = Configuration.GetConnectionString("RealEstateConnection");
                 options.UseSqlServer(connectionString);
-                options.UseLazyLoadingProxies(); // برای Lazy Loading
+                options.UseLazyLoadingProxies();
             });
         }
 
@@ -111,8 +111,8 @@ namespace RealEstateService
         private void ConfigureDI(IServiceCollection services)
         {
             services.AddScoped<IRealEstateRepository, RealEstateRepository>();
-            services.AddScoped<RealEstateCrudService>();
-            services.AddScoped<PhotoCrudService>();
+            services.AddScoped<RealEstateApplication.Services.V1.RealEstatesService>();
+            services.AddScoped<PhotosService>();
         }
     }
 }

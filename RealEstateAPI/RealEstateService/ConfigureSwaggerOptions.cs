@@ -4,6 +4,7 @@ using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Any;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
+using System.Reflection;
 
 namespace RealEstateService
 {
@@ -20,7 +21,7 @@ namespace RealEstateService
         /// <param name="options"></param>
         public void Configure(SwaggerGenOptions options)
         {
-            // add swagger document for every API version discovered
+            // Add swagger document for every API version discovered
             foreach (var description in _provider.ApiVersionDescriptions)
             {
                 options.SwaggerDoc(
@@ -28,13 +29,23 @@ namespace RealEstateService
                     CreateVersionInfo(description));
             }
 
+            // Include XML comments (for displaying documentation in Swagger)
+            var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+            var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+            options.IncludeXmlComments(xmlPath);
+
+            // Map TimeSpan? type to string for Swagger documentation
             options.MapType(typeof(TimeSpan?), () => new OpenApiSchema
             {
                 Type = "string",
                 Example = new OpenApiString("00:00:00")
             });
 
+            // Set custom operation IDs
             options.CustomOperationIds(description => (description.ActionDescriptor as ControllerActionDescriptor)?.ActionName);
+
+            // Add a schema filter to display enum values as strings in Swagger
+            options.SchemaFilter<EnumSchemaFilter>();
         }
 
         /// <summary>
@@ -58,8 +69,7 @@ namespace RealEstateService
             {
                 Title = "Real Estate Service",
                 Version = desc.ApiVersion.ToString(),
-                Description = "<h4>\"Real Estate Project " +
-                              "</h4>",
+                Description = "<h4>Real Estate Project</h4>",
                 TermsOfService = new Uri("https://delta.ir/"),
                 License = new OpenApiLicense
                 {
@@ -77,5 +87,22 @@ namespace RealEstateService
         }
 
         private readonly IApiVersionDescriptionProvider _provider;
+    }
+
+    /// <summary>
+    /// Filter to ensure that enum values are displayed as strings in Swagger.
+    /// </summary>
+    public class EnumSchemaFilter : ISchemaFilter
+    {
+        public void Apply(OpenApiSchema schema, SchemaFilterContext context)
+        {
+            if (context.Type.IsEnum && schema.Enum != null)
+            {
+                schema.Enum.Clear();
+                Enum.GetNames(context.Type)
+                    .ToList()
+                    .ForEach(name => schema.Enum.Add(new OpenApiString(name)));
+            }
+        }
     }
 }

@@ -2,7 +2,6 @@
 using RealEstateApplication.Services.V1;
 using RealEstateCore.Models;
 using RealEstateService.ViewModels.RealEstateAPI.ViewModels;
-using System.Security.Claims;
 
 namespace RealEstateService.Controllers.V1
 {
@@ -10,143 +9,58 @@ namespace RealEstateService.Controllers.V1
     [Route("api/v1/[controller]")]
     public class RealEstateController : ControllerBase
     {
-        public RealEstateController(RealEstateCrudService service,
-                                    ILogger<RealEstateController> logger)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="RealEstateController"/> class.
+        /// </summary>
+        /// <param name="realEstateService">The service for managing real estate operations.</param>
+        public RealEstateController(RealEstatesService realEstateService)
         {
-            _service = service;
-            _logger = logger;
+            _realEstateService = realEstateService;
         }
 
+        /// <summary>
+        /// Adds a new real estate property.
+        /// </summary>
+        /// <param name="realEstateViewModel">The view model containing the details of the real estate property.</param>
+        /// <returns>A <see cref="ResponseModel{T}"/> containing the ID of the newly added real estate property.</returns>
         [HttpPost("add")]
-        public async Task<IActionResult> AddRealEstate([FromBody] RealEstateViewModel realEstateViewModel)
+        public async Task<ResponseModel<int>> AddRealEstate([FromBody] RealEstateViewModel realEstateViewModel)
         {
-            _logger.LogInformation("AddRealEstate API called");
-            try
-            {
-                string? userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? "UserId";
-
-                var realEstate = new RealEstate
-                {
-                    Title = realEstateViewModel.Title,
-                    Status = realEstateViewModel.Status,
-                    Price = realEstateViewModel.Price,
-                    Floor = realEstateViewModel.Floor,
-                    CreatedAt = DateTime.UtcNow,
-                    UpdatedAt = DateTime.UtcNow,
-                    UserId = userId
-                };
-
-                var id = await _service.AddRealEstateAsync(realEstate, userId);
-
-                _logger.LogInformation("Real estate added successfully with ID {RealEstateId}", id);
-                return Ok(new ResponseModel<int>
-                {
-                    StatusCode = 200,
-                    Data = id,
-                    Message = "Real estate added successfully",
-                    Exception = null
-                });
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Error adding real estate");
-                return BadRequest(new ResponseModel<object>
-                {
-                    StatusCode = 400,
-                    Data = null,
-                    Message = "Error adding real estate",
-                    Exception = ex.Message
-                });
-            }
+            return await _realEstateService.AddRealEstateAsync(realEstateViewModel);
         }
 
-        [HttpPut("update-time/{id}")]
-        public async Task<IActionResult> UpdateRealEstateTime(int id)
-        {
-            _logger.LogInformation("UpdateRealEstateTime API called for RealEstateId: {RealEstateId}", id);
-            try
-            {
-                await _service.UpdateRealEstateTimeAsync(id);
-                return Ok(new ResponseModel<int>
-                {
-                    StatusCode = 200,
-                    Data = id,
-                    Message = "Real estate time updated successfully",
-                    Exception = null
-                });
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Error updating real estate time with ID {RealEstateId}", id);
-                return BadRequest(new ResponseModel<object>
-                {
-                    StatusCode = 400,
-                    Data = null,
-                    Message = "Error updating real estate time",
-                    Exception = ex.Message
-                });
-            }
-        }
-
+        /// <summary>
+        /// Archives an existing real estate property by its ID.
+        /// </summary>
+        /// <param name="id">The ID of the real estate property to archive.</param>
+        /// <returns>A <see cref="ResponseModel{T}"/> indicating the status of the operation.</returns>
         [HttpPut("archive/{id}")]
-        public async Task<IActionResult> ArchiveRealEstate(int id)
+        public async Task<ResponseModel<int>> ArchiveRealEstate(int id)
         {
-            _logger.LogInformation("ArchiveRealEstate API called for RealEstateId: {RealEstateId}", id);
-            try
-            {
-                await _service.ArchiveRealEstateAsync(id);
-                _logger.LogInformation("Real estate archived successfully with ID {RealEstateId}", id);
-                return Ok(new ResponseModel<int>
-                {
-                    StatusCode = 200,
-                    Data = id,
-                    Message = "Real estate archived successfully",
-                    Exception = null
-                });
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Error archiving real estate with ID {RealEstateId}", id);
-                return BadRequest(new ResponseModel<object>
-                {
-                    StatusCode = 400,
-                    Data = null,
-                    Message = "Error archiving real estate",
-                    Exception = ex.Message
-                });
-            }
+            return await _realEstateService.ArchiveRealEstateAsync(id);
         }
 
+        /// <summary>
+        /// Updates the timestamp of an existing real estate property.
+        /// </summary>
+        /// <param name="id">The ID of the real estate property to update.</param>
+        /// <returns>A <see cref="ResponseModel{T}"/> containing the ID of the updated real estate property.</returns>
+        [HttpPut("update-time/{id}")]
+        public async Task<ResponseModel<int>> UpdateRealEstateTime(int id)
+        {
+            return await _realEstateService.UpdateRealEstateTimeAsync(id);
+        }
+
+        /// <summary>
+        /// Retrieves a list of all real estate properties.
+        /// </summary>
+        /// <returns>A <see cref="ResponseModel{T}"/> containing a list of all real estate properties.</returns>
         [HttpGet("list")]
-        public async Task<IActionResult> GetAllRealEstates()
+        public async Task<ResponseModel<IEnumerable<RealEstate>>> GetAllRealEstates()
         {
-            _logger.LogInformation("GetAllRealEstates API called");
-            try
-            {
-                var realEstates = await _service.GetAllRealEstatesAsync();
-                _logger.LogInformation("Real estate list retrieved successfully");
-                return Ok(new ResponseModel<IEnumerable<RealEstate>>
-                {
-                    StatusCode = 200,
-                    Data = realEstates,
-                    Message = "Real estate list retrieved successfully",
-                    Exception = null
-                });
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Error retrieving real estate list");
-                return BadRequest(new ResponseModel<object>
-                {
-                    StatusCode = 400,
-                    Data = null,
-                    Message = "Error retrieving real estate list",
-                    Exception = ex.Message
-                });
-            }
+            return await _realEstateService.GetAllRealEstatesAsync();
         }
 
-        private readonly RealEstateCrudService _service;
-        private readonly ILogger<RealEstateController> _logger;
+        private readonly RealEstatesService _realEstateService;
     }
 }

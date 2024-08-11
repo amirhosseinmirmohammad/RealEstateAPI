@@ -8,6 +8,8 @@ namespace RealEstateInfrastructure.Repositories
 {
     public class RealEstateRepository : IRealEstateRepository
     {
+        private readonly RealEstateDbContext _context;
+
         public RealEstateRepository(RealEstateDbContext context)
         {
             _context = context;
@@ -58,7 +60,5 @@ namespace RealEstateInfrastructure.Repositories
             _context.RealEstates.Update(realEstate);
             await _context.SaveChangesAsync();
         }
-
-        private readonly RealEstateDbContext _context;
     }
 }
