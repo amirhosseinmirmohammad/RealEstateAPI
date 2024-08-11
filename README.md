@@ -15,8 +15,7 @@ Real Estate Services is a RESTful Web API built using .NET Core 8, designed to m
 - **Photo Management**
   - Upload photos for real estate listings.
   - Delete photos associated with listings.
-  - Edit photo URLs.
-
+    
 - **Lazy Loading**
   - Automatic loading of related data only when accessed, enhancing performance.
 
