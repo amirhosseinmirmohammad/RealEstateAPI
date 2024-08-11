@@ -15,8 +15,7 @@ Real Estate Services is a RESTful Web API built using .NET Core 8, designed to m
 - **Photo Management**
   - Upload photos for real estate listings.
   - Delete photos associated with listings.
-  - Edit photo URLs.
-
+    
 - **Lazy Loading**
   - Automatic loading of related data only when accessed, enhancing performance.
 
@@ -39,4 +38,8 @@ Real Estate Services is a RESTful Web API built using .NET Core 8, designed to m
 1. Clone the repository:
    ```bash
    git clone https://github.com/amirhosseinmirmohammad/RealEstateAPI.git
-   cd real-estate-services
+
+ ### Create Database
+ - cd RealEstateInfrastructure Project
+ - dotnet ef migrations add InitialCreate
+ - dotnet ef database update
