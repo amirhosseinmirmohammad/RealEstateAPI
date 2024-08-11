@@ -2,7 +2,7 @@
 using RealEstateCore.Enums;
 using RealEstateCore.Interfaces.V1;
 using RealEstateCore.Models;
-using RealEstateService.ViewModels.RealEstateAPI.ViewModels;
+using RealEstateService.ViewModels;
 
 namespace RealEstateApplication.Services.V1
 {
@@ -25,7 +25,7 @@ namespace RealEstateApplication.Services.V1
                     Status = viewModel.Status,
                     Price = viewModel.Price,
                     Floor = viewModel.Floor,
-                    UserId = "UserId", 
+                    UserId = "UserId",
                     CreatedAt = DateTime.UtcNow,
                     UpdatedAt = DateTime.UtcNow
                 };
@@ -33,7 +33,7 @@ namespace RealEstateApplication.Services.V1
                 var id = await _repository.AddRealEstateAsync(realEstate);
                 return new ResponseModel<int>
                 {
-                    StatusCode = 200,
+                    StatusCode = (int)ResponseStatus.Success,
                     Data = id,
                     Message = "Real estate added successfully"
                 };
@@ -43,7 +43,7 @@ namespace RealEstateApplication.Services.V1
                 _logger.LogError(ex, "Error adding real estate");
                 return new ResponseModel<int>
                 {
-                    StatusCode = 500,
+                    StatusCode = (int)ResponseStatus.ServerError,
                     Data = 0,
                     Message = "Error adding real estate",
                     Exception = ex.Message
@@ -72,7 +72,7 @@ namespace RealEstateApplication.Services.V1
 
                     return new ResponseModel<int>
                     {
-                        StatusCode = 200,
+                        StatusCode = (int)ResponseStatus.Success,
                         Data = id,
                         Message = "Real estate archived successfully"
                     };
@@ -80,7 +80,7 @@ namespace RealEstateApplication.Services.V1
 
                 return new ResponseModel<int>
                 {
-                    StatusCode = 404,
+                    StatusCode = (int)ResponseStatus.NotFound,
                     Data = 0,
                     Message = "Real estate not found"
                 };
@@ -90,7 +90,7 @@ namespace RealEstateApplication.Services.V1
                 _logger.LogError(ex, "Error archiving real estate");
                 return new ResponseModel<int>
                 {
-                    StatusCode = 500,
+                    StatusCode = (int)ResponseStatus.ServerError,
                     Data = 0,
                     Message = "Error archiving real estate",
                     Exception = ex.Message
@@ -118,7 +118,7 @@ namespace RealEstateApplication.Services.V1
 
                     return new ResponseModel<int>
                     {
-                        StatusCode = 200,
+                        StatusCode = (int)ResponseStatus.Success,
                         Data = id,
                         Message = "Real estate time updated successfully"
                     };
@@ -126,7 +126,7 @@ namespace RealEstateApplication.Services.V1
 
                 return new ResponseModel<int>
                 {
-                    StatusCode = 404,
+                    StatusCode = (int)ResponseStatus.NotFound,
                     Data = 0,
                     Message = "Real estate not found"
                 };
@@ -136,7 +136,7 @@ namespace RealEstateApplication.Services.V1
                 _logger.LogError(ex, "Error updating real estate time");
                 return new ResponseModel<int>
                 {
-                    StatusCode = 500,
+                    StatusCode = (int)ResponseStatus.ServerError,
                     Data = 0,
                     Message = "Error updating real estate time",
                     Exception = ex.Message
@@ -151,7 +151,7 @@ namespace RealEstateApplication.Services.V1
                 var allRealEstates = await _repository.GetAllRealEstatesAsync();
                 return new ResponseModel<IEnumerable<RealEstate>>
                 {
-                    StatusCode = 200,
+                    StatusCode = (int)ResponseStatus.Success,
                     Data = allRealEstates.OrderByDescending(r => r.UpdatedAt),
                     Message = "Real estate list retrieved successfully"
                 };
@@ -161,7 +161,7 @@ namespace RealEstateApplication.Services.V1
                 _logger.LogError(ex, "Error retrieving real estate list");
                 return new ResponseModel<IEnumerable<RealEstate>>
                 {
-                    StatusCode = 500,
+                    StatusCode = (int)ResponseStatus.ServerError,
                     Data = null,
                     Message = "Error retrieving real estate list",
                     Exception = ex.Message

@@ -36,4 +36,9 @@
     <ProjectReference Include="..\RealEstateInfrastructure\RealEstateInfrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\images\" />
+    <Folder Include="wwwroot\" />
+  </ItemGroup>
+
 </Project>

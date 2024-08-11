@@ -1,4 +1,6 @@
-﻿namespace RealEstateCore.Models
+﻿using System.Text.Json.Serialization;
+
+namespace RealEstateCore.Models
 {
     /// <summary>
     /// Represents a photo associated with a real estate property.
@@ -23,6 +25,7 @@
         /// <summary>
         /// The associated real estate property.
         /// </summary>
+        [JsonIgnore]
         public virtual RealEstate RealEstate { get; set; }
     }
 }

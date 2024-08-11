@@ -40,12 +40,6 @@ namespace RealEstateService
                 Type = "string",
                 Example = new OpenApiString("00:00:00")
             });
-
-            // Set custom operation IDs
-            options.CustomOperationIds(description => (description.ActionDescriptor as ControllerActionDescriptor)?.ActionName);
-
-            // Add a schema filter to display enum values as strings in Swagger
-            options.SchemaFilter<EnumSchemaFilter>();
         }
 
         /// <summary>
@@ -87,22 +81,5 @@ namespace RealEstateService
         }
 
         private readonly IApiVersionDescriptionProvider _provider;
-    }
-
-    /// <summary>
-    /// Filter to ensure that enum values are displayed as strings in Swagger.
-    /// </summary>
-    public class EnumSchemaFilter : ISchemaFilter
-    {
-        public void Apply(OpenApiSchema schema, SchemaFilterContext context)
-        {
-            if (context.Type.IsEnum && schema.Enum != null)
-            {
-                schema.Enum.Clear();
-                Enum.GetNames(context.Type)
-                    .ToList()
-                    .ForEach(name => schema.Enum.Add(new OpenApiString(name)));
-            }
-        }
     }
 }

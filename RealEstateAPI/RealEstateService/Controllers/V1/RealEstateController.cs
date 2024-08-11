@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using RealEstateApplication.Services.V1;
 using RealEstateCore.Models;
-using RealEstateService.ViewModels.RealEstateAPI.ViewModels;
+using RealEstateService.ViewModels;
 
 namespace RealEstateService.Controllers.V1
 {

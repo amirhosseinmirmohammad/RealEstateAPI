@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Logging;
+using RealEstateCore.Enums;
 using RealEstateCore.Interfaces.V1;
 using RealEstateCore.Models;
 
@@ -13,7 +15,7 @@ namespace RealEstateApplication.Services.V1
             _logger = logger;
         }
 
-        public async Task<ResponseModel<List<string>>> AddPhotosToRealEstateAsync(int realEstateId, List<string> filePaths)
+        public async Task<ResponseModel<List<string>>> AddPhotosToRealEstateAsync(int realEstateId, List<IFormFile> files)
         {
             try
             {
@@ -22,13 +24,16 @@ namespace RealEstateApplication.Services.V1
                 {
                     var uploadedPhotoUrls = new List<string>();
 
-                    foreach (var filePath in filePaths)
+                    foreach (var file in files)
                     {
-                        if (File.Exists(filePath))
+                        if (file.Length > 0)
                         {
-                            var fileName = Path.GetFileName(filePath);
+                            var fileName = Path.GetFileName(file.FileName);
                             var destinationPath = Path.Combine("wwwroot/images", fileName);
-                            File.Copy(filePath, destinationPath, overwrite: true);
+                            using (var stream = new FileStream(destinationPath, FileMode.Create))
+                            {
+                                await file.CopyToAsync(stream);
+                            }
 
                             var photoUrl = $"/images/{fileName}";
                             uploadedPhotoUrls.Add(photoUrl);
@@ -41,7 +46,7 @@ namespace RealEstateApplication.Services.V1
                         }
                         else
                         {
-                            _logger.LogWarning("File not found: {FilePath}", filePath);
+                            _logger.LogWarning("File is empty: {FileName}", file.FileName);
                         }
                     }
 
@@ -50,7 +55,7 @@ namespace RealEstateApplication.Services.V1
 
                     return new ResponseModel<List<string>>
                     {
-                        StatusCode = 200,
+                        StatusCode = (int)ResponseStatus.Success,
                         Data = uploadedPhotoUrls,
                         Message = "Photos uploaded successfully"
                     };
@@ -58,7 +63,7 @@ namespace RealEstateApplication.Services.V1
 
                 return new ResponseModel<List<string>>
                 {
-                    StatusCode = 404,
+                    StatusCode = (int)ResponseStatus.NotFound,
                     Data = null,
                     Message = "Real estate not found"
                 };
@@ -68,7 +73,7 @@ namespace RealEstateApplication.Services.V1
                 _logger.LogError(ex, "Error adding photos to real estate");
                 return new ResponseModel<List<string>>
                 {
-                    StatusCode = 500,
+                    StatusCode = (int)ResponseStatus.ServerError,
                     Data = null,
                     Message = "Error adding photos to real estate",
                     Exception = ex.Message
@@ -98,7 +103,7 @@ namespace RealEstateApplication.Services.V1
 
                         return new ResponseModel<int>
                         {
-                            StatusCode = 200,
+                            StatusCode = (int)ResponseStatus.Success,
                             Data = photoId,
                             Message = "Photo deleted successfully"
                         };
@@ -106,7 +111,7 @@ namespace RealEstateApplication.Services.V1
 
                     return new ResponseModel<int>
                     {
-                        StatusCode = 404,
+                        StatusCode = (int)ResponseStatus.NotFound,
                         Data = 0,
                         Message = "Photo not found"
                     };
@@ -114,7 +119,7 @@ namespace RealEstateApplication.Services.V1
 
                 return new ResponseModel<int>
                 {
-                    StatusCode = 404,
+                    StatusCode = (int)ResponseStatus.NotFound,
                     Data = 0,
                     Message = "Real estate not found"
                 };
@@ -124,74 +129,9 @@ namespace RealEstateApplication.Services.V1
                 _logger.LogError(ex, "Error deleting photo from real estate");
                 return new ResponseModel<int>
                 {
-                    StatusCode = 500,
+                    StatusCode = (int)ResponseStatus.ServerError,
                     Data = 0,
                     Message = "Error deleting photo from real estate",
-                    Exception = ex.Message
-                };
-            }
-        }
-
-        public async Task<ResponseModel<int>> EditPhotoInRealEstateAsync(int realEstateId, int photoId, string newPhotoPath)
-        {
-            try
-            {
-                var realEstate = await _repository.GetRealEstateByIdAsync(realEstateId);
-                if (realEstate != null)
-                {
-                    var photo = realEstate.Photos.FirstOrDefault(p => p.Id == photoId);
-                    if (photo != null)
-                    {
-                        if (File.Exists(newPhotoPath))
-                        {
-                            var fileName = Path.GetFileName(newPhotoPath);
-                            var destinationPath = Path.Combine("wwwroot/images", fileName);
-                            File.Copy(newPhotoPath, destinationPath, overwrite: true);
-
-                            var newPhotoUrl = $"/images/{fileName}";
-                            photo.PhotoUrl = newPhotoUrl;
-                            await _repository.UpdateRealEstateAsync(realEstate);
-                            _logger.LogInformation("Photo with ID {PhotoId} updated in RealEstate with ID {RealEstateId}", photoId, realEstateId);
-
-                            return new ResponseModel<int>
-                            {
-                                StatusCode = 200,
-                                Data = photoId,
-                                Message = "Photo updated successfully"
-                            };
-                        }
-
-                        return new ResponseModel<int>
-                        {
-                            StatusCode = 404,
-                            Data = 0,
-                            Message = "New photo file not found"
-                        };
-                    }
-
-                    return new ResponseModel<int>
-                    {
-                        StatusCode = 404,
-                        Data = 0,
-                        Message = "Photo not found"
-                    };
-                }
-
-                return new ResponseModel<int>
-                {
-                    StatusCode = 404,
-                    Data = 0,
-                    Message = "Real estate not found"
-                };
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Error updating photo in real estate");
-                return new ResponseModel<int>
-                {
-                    StatusCode = 500,
-                    Data = 0,
-                    Message = "Error updating photo in real estate",
                     Exception = ex.Message
                 };
             }
