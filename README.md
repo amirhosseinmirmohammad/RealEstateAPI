@@ -40,3 +40,8 @@ Real Estate Services is a RESTful Web API built using .NET Core 8, designed to m
    ```bash
    git clone https://github.com/amirhosseinmirmohammad/RealEstateAPI.git
    cd real-estate-services
+
+ ### Create Database
+ - cd RealEstateInfrastructure Project
+ - dotnet ef migrations add InitialCreate
+ - dotnet ef database update
