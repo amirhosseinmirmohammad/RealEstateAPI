@@ -7,6 +7,7 @@ using RealEstateInfrastructure.Data;
 using RealEstateInfrastructure.Repositories;
 using RealEstateCore.Interfaces.V1;
 using RealEstateApplication.Services.V1;
+using RealEstateCore.Models;
 
 namespace RealEstateService
 {
@@ -109,9 +110,11 @@ namespace RealEstateService
         }
 
         private void ConfigureDI(IServiceCollection services)
-        {
+        {   
+            services.Configure<DatabaseSettings>(Configuration.GetSection("ConnectionStrings"));
+
             services.AddScoped<IRealEstateRepository, RealEstateRepository>();
-            services.AddScoped<RealEstateApplication.Services.V1.RealEstatesService>();
+            services.AddScoped<RealEstatesService>();
             services.AddScoped<PhotosService>();
         }
     }

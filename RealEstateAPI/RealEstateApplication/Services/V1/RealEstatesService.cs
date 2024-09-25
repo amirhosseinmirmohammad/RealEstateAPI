@@ -1,18 +1,64 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Dapper;
+using Microsoft.Data.SqlClient;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using RealEstateCore.Enums;
 using RealEstateCore.Interfaces.V1;
 using RealEstateCore.Models;
 using RealEstateService.ViewModels;
+using System.Data;
 
 namespace RealEstateApplication.Services.V1
 {
     public class RealEstatesService
     {
         public RealEstatesService(IRealEstateRepository repository,
-                                     ILogger<RealEstatesService> logger)
+                                  ILogger<RealEstatesService> logger,
+                                  IOptions<DatabaseSettings> dbSettings)
         {
             _repository = repository;
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+            _connectionString = dbSettings.Value.RealEstateConnection; 
+        }
+
+        public async Task<ResponseModel<IEnumerable<RealEstate>>> GetSimilarTitlesAsync(string input)
+        {
+            if (string.IsNullOrWhiteSpace(input))
+            {
+                return new ResponseModel<IEnumerable<RealEstate>>
+                {
+                    StatusCode = (int)ResponseStatus.ServerError,
+                    Message = "Input cannot be empty.",
+                    Data = null
+                };
+            }
+
+            using (IDbConnection db = new SqlConnection(_connectionString))
+            {
+                string query = @"
+        WITH Similarity AS (
+            SELECT Title, 
+                   100 * (1 - CAST(dbo.LevenshteinPersian(Title, @Input) AS FLOAT) / 
+                       CASE 
+                           WHEN LEN(Title) > LEN(@Input) THEN LEN(Title)
+                           ELSE LEN(@Input)
+                       END) AS SimilarityPercentage
+            FROM [dbo].[RealEstates]
+        )
+        SELECT Title, SimilarityPercentage
+        FROM Similarity
+        WHERE SimilarityPercentage >= 50;
+        ";
+
+                var result = await db.QueryAsync<RealEstate>(query, new { Input = input });
+
+                return new ResponseModel<IEnumerable<RealEstate>>
+                {
+                    StatusCode = (int)ResponseStatus.Success,
+                    Message = "Data fetched successfully.",
+                    Data = result
+                };
+            }
         }
 
         public async Task<ResponseModel<int>> AddRealEstateAsync(RealEstateViewModel viewModel)
@@ -169,6 +215,7 @@ namespace RealEstateApplication.Services.V1
             }
         }
 
+        private readonly string _connectionString;
         private readonly IRealEstateRepository _repository;
         private readonly ILogger<RealEstatesService> _logger;
     }

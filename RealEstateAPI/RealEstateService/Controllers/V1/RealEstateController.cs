@@ -18,6 +18,14 @@ namespace RealEstateService.Controllers.V1
             _realEstateService = realEstateService;
         }
 
+        [HttpGet("similar")]
+        public async Task<ActionResult<IEnumerable<RealEstate>>> GetSimilarTitles([FromQuery] string input)
+        {
+            ResponseModel<IEnumerable<RealEstate>> result = await _realEstateService.GetSimilarTitlesAsync(input);
+
+            return Ok(result);
+        }
+
         /// <summary>
         /// Adds a new real estate property.
         /// </summary>
