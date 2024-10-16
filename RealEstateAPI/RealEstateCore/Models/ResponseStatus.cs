@@ -1,4 +1,4 @@
-﻿namespace RealEstateCore.Enums
+﻿namespace RealEstateCore.Models
 {
     /// <summary>
     /// Enum representing different status codes for API responses.

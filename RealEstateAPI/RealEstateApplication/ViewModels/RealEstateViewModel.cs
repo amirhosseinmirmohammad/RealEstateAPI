@@ -1,6 +1,6 @@
 ﻿using RealEstateCore.Enums;
 
-namespace RealEstateService.ViewModels
+namespace RealEstateApplication.ViewModels
 {
     /// <summary>
     /// ViewModel for representing real estate properties.

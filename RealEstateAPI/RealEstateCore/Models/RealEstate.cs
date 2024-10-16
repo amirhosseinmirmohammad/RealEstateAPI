@@ -32,6 +32,8 @@ namespace RealEstateCore.Models
         /// </summary>
         public int Floor { get; set; }
 
+        public DateTime? LastIndexed {  get; set; }
+
         /// <summary>
         /// The list of photos associated with the real estate property.
         /// </summary>

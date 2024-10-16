@@ -1,7 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Elsa.Http;
+using Elsa.Workflows.Activities;
+using Elsa.Workflows.Contracts;
+using Elsa.Workflows.Services;
+using Microsoft.AspNetCore.Mvc;
+using RealEstateApplication.Services.Helpers;
 using RealEstateApplication.Services.V1;
+using RealEstateApplication.ViewModels;
 using RealEstateCore.Models;
-using RealEstateService.ViewModels;
+using RealEstateService.ElsaWorkflow;
 
 namespace RealEstateService.Controllers.V1
 {
@@ -13,17 +19,40 @@ namespace RealEstateService.Controllers.V1
         /// Initializes a new instance of the <see cref="RealEstateController"/> class.
         /// </summary>
         /// <param name="realEstateService">The service for managing real estate operations.</param>
-        public RealEstateController(RealEstatesService realEstateService)
+        /// <param name="luceneEngine"></param>
+        public RealEstateController(RealEstatesService realEstateService,
+                                    ILuceneEngine<RealEstate> luceneEngine,
+                                    //IWorkflowService workflowService,
+                                    IWorkflowRunner workflowRunner)
         {
-            _realEstateService = realEstateService;
+            _realEstateService = realEstateService ?? throw new ArgumentNullException(nameof(realEstateService));
+            _luceneEngine = luceneEngine ?? throw new ArgumentNullException(nameof(luceneEngine));
+            //_workflowService = workflowService;
+            _workflowRunner = workflowRunner;
         }
 
-        [HttpGet("similar")]
-        public async Task<ActionResult<IEnumerable<RealEstate>>> GetSimilarTitles([FromQuery] string input)
+        [HttpGet("similar-function")]
+        public async Task<ActionResult<IEnumerable<RealEstate>>> GetSimilarTitlesFunction([FromQuery] string input)
         {
-            ResponseModel<IEnumerable<RealEstate>> result = await _realEstateService.GetSimilarTitlesAsync(input);
+            ResponseModel<IEnumerable<RealEstate>> response = await _realEstateService.GetSimilarTitlesWithFunctionAsync(input);
 
-            return Ok(result);
+            return Ok(response);
+        }
+
+        [HttpGet("similar-freetext")]
+        public async Task<ActionResult<IEnumerable<RealEstate>>> GetSimilarTitlesFreetext([FromQuery] string input)
+        {
+            var response = await _realEstateService.GetSimilarTitlesWithFreeText(input);
+
+            return Ok(response);
+        }
+
+        [HttpGet("similar-lucine")]
+        public IActionResult SearchFuzzy(string field, string term, int pageNumber = 1, int pageSize = 10, double similarity = 0.5)
+        {
+            var response = _luceneEngine.SearchWithSimilarity(term, field, pageNumber, pageSize, similarity);
+
+            return Ok(response);
         }
 
         /// <summary>
@@ -69,6 +98,25 @@ namespace RealEstateService.Controllers.V1
             return await _realEstateService.GetAllRealEstatesAsync();
         }
 
+        //[HttpPost("start-workflow")]
+        //public async Task<IActionResult> StartWorkflow()
+        //{
+        //    await _workflowService.StartWorkflowAsync();
+        //    return Ok("Workflow started");
+        //}
+
+        [HttpGet("run-workflow")]
+        public async Task Get()
+        {
+            await _workflowRunner.RunAsync(new WriteHttpResponse
+            {
+                Content = new("Hello ASP.NET world!")
+            });
+        }
+
         private readonly RealEstatesService _realEstateService;
+        private readonly ILuceneEngine<RealEstate> _luceneEngine;
+        private readonly IWorkflowService _workflowService;
+        private readonly IWorkflowRunner _workflowRunner;
     }
 }

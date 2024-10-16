@@ -1,0 +1,419 @@
+2024-09-30 17:00:04.409 +03:30 [DBG] Registered model binder providers, in the following order: ["Microsoft.AspNetCore.Mvc.Versioning.ApiVersionModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.BinderTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ServicesModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.BodyModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.HeaderModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FloatingPointTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.EnumTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.DateTimeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.SimpleTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.TryParseModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CancellationTokenModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ByteArrayModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FormFileModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FormCollectionModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.KeyValuePairModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.DictionaryModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ArrayModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CollectionModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ComplexObjectModelBinderProvider"]
+2024-09-30 17:00:04.511 +03:30 [INF] Starting web host
+2024-09-30 17:00:04.518 +03:30 [DBG] Hosting starting
+2024-09-30 17:00:04.706 +03:30 [WRN] The WebRootPath was not found: D:\Projects\Personal\RealEstateAPI\RealEstateAPI\RealEstateService\wwwroot. Static files may be unavailable.
+2024-09-30 17:00:04.878 +03:30 [INF] Unable to bind to http://localhost:5041 on the IPv4 loopback interface: 'An attempt was made to access a socket in a way forbidden by its access permissions.'.
+2024-09-30 17:00:04.884 +03:30 [INF] Unable to bind to http://localhost:5041 on the IPv6 loopback interface: 'An attempt was made to access a socket in a way forbidden by its access permissions.'.
+2024-09-30 17:00:04.929 +03:30 [ERR] Hosting failed to start
+System.IO.IOException: Failed to bind to address http://localhost:5041.
+ ---> System.AggregateException: One or more errors occurred. (An attempt was made to access a socket in a way forbidden by its access permissions.) (An attempt was made to access a socket in a way forbidden by its access permissions.)
+ ---> System.Net.Sockets.SocketException (10013): An attempt was made to access a socket in a way forbidden by its access permissions.
+   at System.Net.Sockets.Socket.UpdateStatusAfterSocketErrorAndThrowException(SocketError error, Boolean disconnectOnFailure, String callerName)
+   at System.Net.Sockets.Socket.DoBind(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   at System.Net.Sockets.Socket.Bind(EndPoint localEP)
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketTransportOptions.CreateDefaultBoundListenSocket(EndPoint endpoint)
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketConnectionListener.Bind()
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketTransportFactory.BindAsync(EndPoint endpoint, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure.TransportManager.BindAsync(EndPoint endPoint, ConnectionDelegate connectionDelegate, EndpointConfig endpointConfig, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.<>c__DisplayClass28_0`1.<<StartAsync>g__OnBind|0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.BindEndpointAsync(ListenOptions endpoint, AddressBindContext context, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.LocalhostListenOptions.BindAsync(AddressBindContext context, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+ ---> (Inner Exception #1) System.Net.Sockets.SocketException (10013): An attempt was made to access a socket in a way forbidden by its access permissions.
+   at System.Net.Sockets.Socket.UpdateStatusAfterSocketErrorAndThrowException(SocketError error, Boolean disconnectOnFailure, String callerName)
+   at System.Net.Sockets.Socket.DoBind(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   at System.Net.Sockets.Socket.Bind(EndPoint localEP)
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketTransportOptions.CreateDefaultBoundListenSocket(EndPoint endpoint)
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketConnectionListener.Bind()
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketTransportFactory.BindAsync(EndPoint endpoint, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure.TransportManager.BindAsync(EndPoint endPoint, ConnectionDelegate connectionDelegate, EndpointConfig endpointConfig, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.<>c__DisplayClass28_0`1.<<StartAsync>g__OnBind|0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.BindEndpointAsync(ListenOptions endpoint, AddressBindContext context, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.LocalhostListenOptions.BindAsync(AddressBindContext context, CancellationToken cancellationToken)<---
+
+   --- End of inner exception stack trace ---
+   at Microsoft.AspNetCore.Server.Kestrel.Core.LocalhostListenOptions.BindAsync(AddressBindContext context, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.AddressesStrategy.BindAsync(AddressBindContext context, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.BindAsync(ListenOptions[] listenOptions, AddressBindContext context, Func`2 useHttps, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.BindAsync(CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.StartAsync[TContext](IHttpApplication`1 application, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Hosting.GenericWebHostService.StartAsync(CancellationToken cancellationToken)
+   at Microsoft.Extensions.Hosting.Internal.Host.<StartAsync>b__15_1(IHostedService service, CancellationToken token)
+   at Microsoft.Extensions.Hosting.Internal.Host.ForeachService[T](IEnumerable`1 services, CancellationToken token, Boolean concurrent, Boolean abortOnFirstException, List`1 exceptions, Func`3 operation)
+2024-09-30 17:00:05.230 +03:30 [FTL] Host terminated unexpectedly
+System.IO.IOException: Failed to bind to address http://localhost:5041.
+ ---> System.AggregateException: One or more errors occurred. (An attempt was made to access a socket in a way forbidden by its access permissions.) (An attempt was made to access a socket in a way forbidden by its access permissions.)
+ ---> System.Net.Sockets.SocketException (10013): An attempt was made to access a socket in a way forbidden by its access permissions.
+   at System.Net.Sockets.Socket.UpdateStatusAfterSocketErrorAndThrowException(SocketError error, Boolean disconnectOnFailure, String callerName)
+   at System.Net.Sockets.Socket.DoBind(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   at System.Net.Sockets.Socket.Bind(EndPoint localEP)
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketTransportOptions.CreateDefaultBoundListenSocket(EndPoint endpoint)
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketConnectionListener.Bind()
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketTransportFactory.BindAsync(EndPoint endpoint, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure.TransportManager.BindAsync(EndPoint endPoint, ConnectionDelegate connectionDelegate, EndpointConfig endpointConfig, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.<>c__DisplayClass28_0`1.<<StartAsync>g__OnBind|0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.BindEndpointAsync(ListenOptions endpoint, AddressBindContext context, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.LocalhostListenOptions.BindAsync(AddressBindContext context, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+ ---> (Inner Exception #1) System.Net.Sockets.SocketException (10013): An attempt was made to access a socket in a way forbidden by its access permissions.
+   at System.Net.Sockets.Socket.UpdateStatusAfterSocketErrorAndThrowException(SocketError error, Boolean disconnectOnFailure, String callerName)
+   at System.Net.Sockets.Socket.DoBind(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   at System.Net.Sockets.Socket.Bind(EndPoint localEP)
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketTransportOptions.CreateDefaultBoundListenSocket(EndPoint endpoint)
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketConnectionListener.Bind()
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketTransportFactory.BindAsync(EndPoint endpoint, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure.TransportManager.BindAsync(EndPoint endPoint, ConnectionDelegate connectionDelegate, EndpointConfig endpointConfig, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.<>c__DisplayClass28_0`1.<<StartAsync>g__OnBind|0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.BindEndpointAsync(ListenOptions endpoint, AddressBindContext context, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.LocalhostListenOptions.BindAsync(AddressBindContext context, CancellationToken cancellationToken)<---
+
+   --- End of inner exception stack trace ---
+   at Microsoft.AspNetCore.Server.Kestrel.Core.LocalhostListenOptions.BindAsync(AddressBindContext context, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.AddressesStrategy.BindAsync(AddressBindContext context, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.BindAsync(ListenOptions[] listenOptions, AddressBindContext context, Func`2 useHttps, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.BindAsync(CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.StartAsync[TContext](IHttpApplication`1 application, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Hosting.GenericWebHostService.StartAsync(CancellationToken cancellationToken)
+   at Microsoft.Extensions.Hosting.Internal.Host.<StartAsync>b__15_1(IHostedService service, CancellationToken token)
+   at Microsoft.Extensions.Hosting.Internal.Host.ForeachService[T](IEnumerable`1 services, CancellationToken token, Boolean concurrent, Boolean abortOnFirstException, List`1 exceptions, Func`3 operation)
+   at Microsoft.Extensions.Hosting.Internal.Host.StartAsync(CancellationToken cancellationToken)
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.RunAsync(IHost host, CancellationToken token)
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.RunAsync(IHost host, CancellationToken token)
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.Run(IHost host)
+   at RealEstateService.Program.Main(String[] args) in D:\Projects\Personal\RealEstateAPI\RealEstateAPI\RealEstateService\Program.cs:line 27
+2024-09-30 17:00:14.957 +03:30 [DBG] Registered model binder providers, in the following order: ["Microsoft.AspNetCore.Mvc.Versioning.ApiVersionModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.BinderTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ServicesModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.BodyModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.HeaderModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FloatingPointTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.EnumTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.DateTimeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.SimpleTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.TryParseModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CancellationTokenModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ByteArrayModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FormFileModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FormCollectionModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.KeyValuePairModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.DictionaryModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ArrayModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CollectionModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ComplexObjectModelBinderProvider"]
+2024-09-30 17:00:15.135 +03:30 [INF] Starting web host
+2024-09-30 17:00:15.144 +03:30 [DBG] Hosting starting
+2024-09-30 17:00:15.311 +03:30 [WRN] The WebRootPath was not found: D:\Projects\Personal\RealEstateAPI\RealEstateAPI\RealEstateService\wwwroot. Static files may be unavailable.
+2024-09-30 17:00:15.416 +03:30 [INF] Unable to bind to http://localhost:5041 on the IPv4 loopback interface: 'An attempt was made to access a socket in a way forbidden by its access permissions.'.
+2024-09-30 17:00:15.424 +03:30 [INF] Unable to bind to http://localhost:5041 on the IPv6 loopback interface: 'An attempt was made to access a socket in a way forbidden by its access permissions.'.
+2024-09-30 17:00:15.459 +03:30 [ERR] Hosting failed to start
+System.IO.IOException: Failed to bind to address http://localhost:5041.
+ ---> System.AggregateException: One or more errors occurred. (An attempt was made to access a socket in a way forbidden by its access permissions.) (An attempt was made to access a socket in a way forbidden by its access permissions.)
+ ---> System.Net.Sockets.SocketException (10013): An attempt was made to access a socket in a way forbidden by its access permissions.
+   at System.Net.Sockets.Socket.UpdateStatusAfterSocketErrorAndThrowException(SocketError error, Boolean disconnectOnFailure, String callerName)
+   at System.Net.Sockets.Socket.DoBind(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   at System.Net.Sockets.Socket.Bind(EndPoint localEP)
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketTransportOptions.CreateDefaultBoundListenSocket(EndPoint endpoint)
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketConnectionListener.Bind()
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketTransportFactory.BindAsync(EndPoint endpoint, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure.TransportManager.BindAsync(EndPoint endPoint, ConnectionDelegate connectionDelegate, EndpointConfig endpointConfig, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.<>c__DisplayClass28_0`1.<<StartAsync>g__OnBind|0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.BindEndpointAsync(ListenOptions endpoint, AddressBindContext context, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.LocalhostListenOptions.BindAsync(AddressBindContext context, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+ ---> (Inner Exception #1) System.Net.Sockets.SocketException (10013): An attempt was made to access a socket in a way forbidden by its access permissions.
+   at System.Net.Sockets.Socket.UpdateStatusAfterSocketErrorAndThrowException(SocketError error, Boolean disconnectOnFailure, String callerName)
+   at System.Net.Sockets.Socket.DoBind(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   at System.Net.Sockets.Socket.Bind(EndPoint localEP)
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketTransportOptions.CreateDefaultBoundListenSocket(EndPoint endpoint)
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketConnectionListener.Bind()
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketTransportFactory.BindAsync(EndPoint endpoint, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure.TransportManager.BindAsync(EndPoint endPoint, ConnectionDelegate connectionDelegate, EndpointConfig endpointConfig, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.<>c__DisplayClass28_0`1.<<StartAsync>g__OnBind|0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.BindEndpointAsync(ListenOptions endpoint, AddressBindContext context, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.LocalhostListenOptions.BindAsync(AddressBindContext context, CancellationToken cancellationToken)<---
+
+   --- End of inner exception stack trace ---
+   at Microsoft.AspNetCore.Server.Kestrel.Core.LocalhostListenOptions.BindAsync(AddressBindContext context, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.AddressesStrategy.BindAsync(AddressBindContext context, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.BindAsync(ListenOptions[] listenOptions, AddressBindContext context, Func`2 useHttps, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.BindAsync(CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.StartAsync[TContext](IHttpApplication`1 application, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Hosting.GenericWebHostService.StartAsync(CancellationToken cancellationToken)
+   at Microsoft.Extensions.Hosting.Internal.Host.<StartAsync>b__15_1(IHostedService service, CancellationToken token)
+   at Microsoft.Extensions.Hosting.Internal.Host.ForeachService[T](IEnumerable`1 services, CancellationToken token, Boolean concurrent, Boolean abortOnFirstException, List`1 exceptions, Func`3 operation)
+2024-09-30 17:00:15.575 +03:30 [FTL] Host terminated unexpectedly
+System.IO.IOException: Failed to bind to address http://localhost:5041.
+ ---> System.AggregateException: One or more errors occurred. (An attempt was made to access a socket in a way forbidden by its access permissions.) (An attempt was made to access a socket in a way forbidden by its access permissions.)
+ ---> System.Net.Sockets.SocketException (10013): An attempt was made to access a socket in a way forbidden by its access permissions.
+   at System.Net.Sockets.Socket.UpdateStatusAfterSocketErrorAndThrowException(SocketError error, Boolean disconnectOnFailure, String callerName)
+   at System.Net.Sockets.Socket.DoBind(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   at System.Net.Sockets.Socket.Bind(EndPoint localEP)
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketTransportOptions.CreateDefaultBoundListenSocket(EndPoint endpoint)
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketConnectionListener.Bind()
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketTransportFactory.BindAsync(EndPoint endpoint, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure.TransportManager.BindAsync(EndPoint endPoint, ConnectionDelegate connectionDelegate, EndpointConfig endpointConfig, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.<>c__DisplayClass28_0`1.<<StartAsync>g__OnBind|0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.BindEndpointAsync(ListenOptions endpoint, AddressBindContext context, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.LocalhostListenOptions.BindAsync(AddressBindContext context, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+ ---> (Inner Exception #1) System.Net.Sockets.SocketException (10013): An attempt was made to access a socket in a way forbidden by its access permissions.
+   at System.Net.Sockets.Socket.UpdateStatusAfterSocketErrorAndThrowException(SocketError error, Boolean disconnectOnFailure, String callerName)
+   at System.Net.Sockets.Socket.DoBind(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   at System.Net.Sockets.Socket.Bind(EndPoint localEP)
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketTransportOptions.CreateDefaultBoundListenSocket(EndPoint endpoint)
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketConnectionListener.Bind()
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketTransportFactory.BindAsync(EndPoint endpoint, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure.TransportManager.BindAsync(EndPoint endPoint, ConnectionDelegate connectionDelegate, EndpointConfig endpointConfig, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.<>c__DisplayClass28_0`1.<<StartAsync>g__OnBind|0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.BindEndpointAsync(ListenOptions endpoint, AddressBindContext context, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.LocalhostListenOptions.BindAsync(AddressBindContext context, CancellationToken cancellationToken)<---
+
+   --- End of inner exception stack trace ---
+   at Microsoft.AspNetCore.Server.Kestrel.Core.LocalhostListenOptions.BindAsync(AddressBindContext context, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.AddressesStrategy.BindAsync(AddressBindContext context, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.BindAsync(ListenOptions[] listenOptions, AddressBindContext context, Func`2 useHttps, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.BindAsync(CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.StartAsync[TContext](IHttpApplication`1 application, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Hosting.GenericWebHostService.StartAsync(CancellationToken cancellationToken)
+   at Microsoft.Extensions.Hosting.Internal.Host.<StartAsync>b__15_1(IHostedService service, CancellationToken token)
+   at Microsoft.Extensions.Hosting.Internal.Host.ForeachService[T](IEnumerable`1 services, CancellationToken token, Boolean concurrent, Boolean abortOnFirstException, List`1 exceptions, Func`3 operation)
+   at Microsoft.Extensions.Hosting.Internal.Host.StartAsync(CancellationToken cancellationToken)
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.RunAsync(IHost host, CancellationToken token)
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.RunAsync(IHost host, CancellationToken token)
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.Run(IHost host)
+   at RealEstateService.Program.Main(String[] args) in D:\Projects\Personal\RealEstateAPI\RealEstateAPI\RealEstateService\Program.cs:line 27
+2024-09-30 17:04:28.155 +03:30 [DBG] Registered model binder providers, in the following order: ["Microsoft.AspNetCore.Mvc.Versioning.ApiVersionModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.BinderTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ServicesModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.BodyModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.HeaderModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FloatingPointTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.EnumTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.DateTimeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.SimpleTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.TryParseModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CancellationTokenModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ByteArrayModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FormFileModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FormCollectionModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.KeyValuePairModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.DictionaryModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ArrayModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CollectionModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ComplexObjectModelBinderProvider"]
+2024-09-30 17:04:28.338 +03:30 [INF] Starting web host
+2024-09-30 17:04:28.351 +03:30 [DBG] Hosting starting
+2024-09-30 17:04:28.682 +03:30 [WRN] The WebRootPath was not found: D:\Projects\Personal\RealEstateAPI\RealEstateAPI\RealEstateService\wwwroot. Static files may be unavailable.
+2024-09-30 17:04:29.093 +03:30 [INF] Now listening on: http://localhost:5041
+2024-09-30 17:04:29.096 +03:30 [DBG] Loaded hosting startup assembly RealEstateService
+2024-09-30 17:04:29.099 +03:30 [DBG] Loaded hosting startup assembly Microsoft.AspNetCore.Watch.BrowserRefresh
+2024-09-30 17:04:29.101 +03:30 [DBG] Loaded hosting startup assembly Microsoft.WebTools.BrowserLink.Net
+2024-09-30 17:04:29.103 +03:30 [INF] Application started. Press Ctrl+C to shut down.
+2024-09-30 17:04:29.108 +03:30 [INF] Hosting environment: Development
+2024-09-30 17:04:29.110 +03:30 [INF] Content root path: D:\Projects\Personal\RealEstateAPI\RealEstateAPI\RealEstateService
+2024-09-30 17:04:29.113 +03:30 [DBG] Hosting started
+2024-09-30 17:04:29.317 +03:30 [DBG] Connection id "0HN71AIE2GRI5" accepted.
+2024-09-30 17:04:29.317 +03:30 [DBG] Connection id "0HN71AIE2GRI6" accepted.
+2024-09-30 17:04:29.322 +03:30 [DBG] Connection id "0HN71AIE2GRI5" started.
+2024-09-30 17:04:29.327 +03:30 [DBG] Connection id "0HN71AIE2GRI6" started.
+2024-09-30 17:04:30.735 +03:30 [DBG] Connection id "0HN71AIE2GRI7" accepted.
+2024-09-30 17:04:30.759 +03:30 [DBG] Connection id "0HN71AIE2GRI7" started.
+2024-09-30 17:04:30.899 +03:30 [INF] Request starting HTTP/1.1 GET http://localhost:5041/swagger/index.html - null null
+2024-09-30 17:04:31.521 +03:30 [DBG] Wildcard detected, all requests with hosts will be allowed.
+2024-09-30 17:04:31.582 +03:30 [DBG] No candidates found for the request path '/swagger/index.html'
+2024-09-30 17:04:31.586 +03:30 [DBG] Request did not match any endpoints
+2024-09-30 17:04:31.592 +03:30 [DBG] The request path /swagger/index.html does not match an existing file
+2024-09-30 17:04:31.953 +03:30 [DBG] Response markup is scheduled to include Browser Link script injection.
+2024-09-30 17:04:31.958 +03:30 [DBG] Response markup is scheduled to include browser refresh script injection.
+2024-09-30 17:04:32.026 +03:30 [DBG] Response markup was updated to include Browser Link script injection.
+2024-09-30 17:04:32.050 +03:30 [DBG] Response markup was updated to include browser refresh script injection.
+2024-09-30 17:04:32.054 +03:30 [DBG] Connection id "0HN71AIE2GRI7" completed keep alive response.
+2024-09-30 17:04:32.068 +03:30 [INF] Request finished HTTP/1.1 GET http://localhost:5041/swagger/index.html - 200 null text/html;charset=utf-8 1214.5616ms
+2024-09-30 17:04:32.101 +03:30 [DBG] Connection id "0HN71AIE2GRI8" accepted.
+2024-09-30 17:04:32.116 +03:30 [INF] Request starting HTTP/1.1 GET http://localhost:5041/_framework/aspnetcore-browser-refresh.js - null null
+2024-09-30 17:04:32.120 +03:30 [DBG] Connection id "0HN71AIE2GRI8" started.
+2024-09-30 17:04:32.121 +03:30 [DBG] Connection id "0HN71AIE2GRI9" accepted.
+2024-09-30 17:04:32.151 +03:30 [DBG] Connection id "0HN71AIE2GRI7" completed keep alive response.
+2024-09-30 17:04:32.199 +03:30 [INF] Request starting HTTP/1.1 GET http://localhost:5041/swagger/index.js - null null
+2024-09-30 17:04:32.201 +03:30 [DBG] Connection id "0HN71AIE2GRI9" started.
+2024-09-30 17:04:32.204 +03:30 [INF] Request finished HTTP/1.1 GET http://localhost:5041/_framework/aspnetcore-browser-refresh.js - 200 13770 application/javascript; charset=utf-8 87.7812ms
+2024-09-30 17:04:32.220 +03:30 [DBG] No candidates found for the request path '/swagger/index.js'
+2024-09-30 17:04:32.223 +03:30 [INF] Request starting HTTP/1.1 GET http://localhost:5041/_vs/browserLink - null null
+2024-09-30 17:04:32.239 +03:30 [DBG] Request did not match any endpoints
+2024-09-30 17:04:32.247 +03:30 [DBG] The request path /swagger/index.js does not match an existing file
+2024-09-30 17:04:32.253 +03:30 [DBG] Connection id "0HN71AIE2GRI8" completed keep alive response.
+2024-09-30 17:04:32.258 +03:30 [INF] Request finished HTTP/1.1 GET http://localhost:5041/swagger/index.js - 200 null application/javascript;charset=utf-8 59.2113ms
+2024-09-30 17:04:32.346 +03:30 [DBG] Connection id "0HN71AIE2GRI9" completed keep alive response.
+2024-09-30 17:04:32.349 +03:30 [INF] Request finished HTTP/1.1 GET http://localhost:5041/_vs/browserLink - 200 null text/javascript; charset=UTF-8 126.8409ms
+2024-09-30 17:04:32.696 +03:30 [INF] Request starting HTTP/1.1 GET http://localhost:5041/swagger/v1/swagger.json - null null
+2024-09-30 17:04:32.703 +03:30 [DBG] No candidates found for the request path '/swagger/v1/swagger.json'
+2024-09-30 17:04:32.706 +03:30 [DBG] Request did not match any endpoints
+2024-09-30 17:04:32.709 +03:30 [DBG] The request path /swagger/v1/swagger.json does not match an existing file
+2024-09-30 17:04:33.128 +03:30 [DBG] Connection id "0HN71AIE2GRI9" completed keep alive response.
+2024-09-30 17:04:33.131 +03:30 [INF] Request finished HTTP/1.1 GET http://localhost:5041/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 434.7228ms
+2024-09-30 17:04:58.584 +03:30 [DBG] Connection id "0HN71AIE2GRI7" received FIN.
+2024-09-30 17:04:58.584 +03:30 [DBG] Connection id "0HN71AIE2GRI8" received FIN.
+2024-09-30 17:04:58.617 +03:30 [DBG] Connection id "0HN71AIE2GRI9" received FIN.
+2024-09-30 17:04:58.666 +03:30 [DBG] Connection id "0HN71AIE2GRI9" sending FIN because: "The Socket transport's send loop completed gracefully."
+2024-09-30 17:04:58.666 +03:30 [DBG] Connection id "0HN71AIE2GRI8" sending FIN because: "The Socket transport's send loop completed gracefully."
+2024-09-30 17:04:58.666 +03:30 [DBG] Connection id "0HN71AIE2GRI7" sending FIN because: "The Socket transport's send loop completed gracefully."
+2024-09-30 17:04:58.687 +03:30 [DBG] Connection id "0HN71AIE2GRI9" disconnecting.
+2024-09-30 17:04:58.709 +03:30 [DBG] Connection id "0HN71AIE2GRI8" disconnecting.
+2024-09-30 17:04:58.712 +03:30 [DBG] Connection id "0HN71AIE2GRI7" disconnecting.
+2024-09-30 17:04:58.719 +03:30 [DBG] Connection id "0HN71AIE2GRI9" stopped.
+2024-09-30 17:04:58.719 +03:30 [DBG] Connection id "0HN71AIE2GRI8" stopped.
+2024-09-30 17:04:58.731 +03:30 [DBG] Connection id "0HN71AIE2GRI7" stopped.
+2024-09-30 18:06:13.766 +03:30 [DBG] Connection id "0HN71AIE2GRIA" accepted.
+2024-09-30 18:06:13.808 +03:30 [DBG] Connection id "0HN71AIE2GRIA" started.
+2024-09-30 18:06:13.812 +03:30 [INF] Request starting HTTP/1.1 GET http://localhost:5041/api/v1/RealEstate/similar-freetext?input=%D8%B3%DB%8C%D9%86 - null null
+2024-09-30 18:06:13.843 +03:30 [DBG] 1 candidate(s) found for the request path '/api/v1/RealEstate/similar-freetext'
+2024-09-30 18:06:13.851 +03:30 [DBG] Endpoint 'RealEstateService.Controllers.V1.RealEstateController.GetSimilarTitlesFreetext (RealEstateService)' with route pattern 'api/v1/RealEstate/similar-freetext' is valid for the request path '/api/v1/RealEstate/similar-freetext'
+2024-09-30 18:06:13.864 +03:30 [DBG] Request matched endpoint 'RealEstateService.Controllers.V1.RealEstateController.GetSimilarTitlesFreetext (RealEstateService)'
+2024-09-30 18:06:13.868 +03:30 [DBG] Static files was skipped as the request already matched an endpoint.
+2024-09-30 18:06:13.869 +03:30 [DBG] Static files was skipped as the request already matched an endpoint.
+2024-09-30 18:06:13.881 +03:30 [INF] Executing endpoint 'RealEstateService.Controllers.V1.RealEstateController.GetSimilarTitlesFreetext (RealEstateService)'
+2024-09-30 18:06:13.935 +03:30 [INF] Route matched with {action = "GetSimilarTitlesFreetext", controller = "RealEstate"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[RealEstateCore.Models.RealEstate]]] GetSimilarTitlesFreetext(System.String) on controller RealEstateService.Controllers.V1.RealEstateController (RealEstateService).
+2024-09-30 18:06:13.943 +03:30 [DBG] Execution plan of authorization filters (in the following order): ["None"]
+2024-09-30 18:06:13.946 +03:30 [DBG] Execution plan of resource filters (in the following order): ["None"]
+2024-09-30 18:06:13.950 +03:30 [DBG] Execution plan of action filters (in the following order): ["Microsoft.AspNetCore.Mvc.ModelBinding.UnsupportedContentTypeFilter (Order: -3000)","Microsoft.AspNetCore.Mvc.Infrastructure.ModelStateInvalidFilter (Order: -2000)","Microsoft.AspNetCore.Mvc.ReportApiVersionsAttribute (Order: 0)","Microsoft.AspNetCore.Mvc.Versioning.ApplyContentTypeVersionActionFilter"]
+2024-09-30 18:06:13.955 +03:30 [DBG] Execution plan of exception filters (in the following order): ["None"]
+2024-09-30 18:06:13.958 +03:30 [DBG] Execution plan of result filters (in the following order): ["Microsoft.AspNetCore.Mvc.Infrastructure.ClientErrorResultFilter (Order: -2000)","Microsoft.AspNetCore.Mvc.ReportApiVersionsAttribute (Order: 0)"]
+2024-09-30 18:06:13.964 +03:30 [DBG] Executing controller factory for controller RealEstateService.Controllers.V1.RealEstateController (RealEstateService)
+2024-09-30 18:06:15.504 +03:30 [DBG] An 'IServiceProvider' was created for internal use by Entity Framework.
+2024-09-30 18:06:16.055 +03:30 [DBG] Executed controller factory for controller RealEstateService.Controllers.V1.RealEstateController (RealEstateService)
+2024-09-30 18:06:16.073 +03:30 [DBG] Attempting to bind parameter 'input' of type 'System.String' ...
+2024-09-30 18:06:16.079 +03:30 [DBG] Attempting to bind parameter 'input' of type 'System.String' using the name 'input' in request data ...
+2024-09-30 18:06:16.083 +03:30 [DBG] Done attempting to bind parameter 'input' of type 'System.String'.
+2024-09-30 18:06:16.086 +03:30 [DBG] Done attempting to bind parameter 'input' of type 'System.String'.
+2024-09-30 18:06:16.088 +03:30 [DBG] Attempting to validate the bound parameter 'input' of type 'System.String' ...
+2024-09-30 18:06:16.100 +03:30 [DBG] Done attempting to validate the bound parameter 'input' of type 'System.String'.
+2024-09-30 18:06:16.261 +03:30 [INF] Executing action method RealEstateService.Controllers.V1.RealEstateController.GetSimilarTitlesFreetext (RealEstateService) - Validation state: "Valid"
+2024-09-30 18:06:19.170 +03:30 [INF] Executed action method RealEstateService.Controllers.V1.RealEstateController.GetSimilarTitlesFreetext (RealEstateService), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 2900.9513ms.
+2024-09-30 18:06:19.182 +03:30 [DBG] List of registered output formatters, in the following order: ["Microsoft.AspNetCore.Mvc.Formatters.HttpNoContentOutputFormatter","Microsoft.AspNetCore.Mvc.Formatters.StringOutputFormatter","Microsoft.AspNetCore.Mvc.Formatters.StreamOutputFormatter","Microsoft.AspNetCore.Mvc.Formatters.SystemTextJsonOutputFormatter"]
+2024-09-30 18:06:19.191 +03:30 [DBG] Attempting to select an output formatter based on Accept header '["text/plain; x-api-version=1.0"]'.
+2024-09-30 18:06:19.196 +03:30 [DBG] Could not find an output formatter based on content negotiation. Accepted types were (["text/plain; x-api-version=1.0"])
+2024-09-30 18:06:19.199 +03:30 [DBG] Attempting to select an output formatter without using a content type as no explicit content types were specified for the response.
+2024-09-30 18:06:19.200 +03:30 [DBG] Attempting to select the first formatter in the output formatters list which can write the result.
+2024-09-30 18:06:19.202 +03:30 [DBG] Selected output formatter 'Microsoft.AspNetCore.Mvc.Formatters.SystemTextJsonOutputFormatter' and content type 'application/json' to write the response.
+2024-09-30 18:06:19.205 +03:30 [INF] Executing OkObjectResult, writing value of type 'RealEstateCore.Models.ResponseModel`1[[System.Collections.Generic.IEnumerable`1[[RealEstateCore.Models.RealEstate, RealEstateCore, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2024-09-30 18:06:19.280 +03:30 [INF] Executed action RealEstateService.Controllers.V1.RealEstateController.GetSimilarTitlesFreetext (RealEstateService) in 5312.9886ms
+2024-09-30 18:06:19.284 +03:30 [INF] Executed endpoint 'RealEstateService.Controllers.V1.RealEstateController.GetSimilarTitlesFreetext (RealEstateService)'
+2024-09-30 18:06:19.293 +03:30 [INF] HTTP GET /api/v1/RealEstate/similar-freetext responded 200 in 5416.6471 ms
+2024-09-30 18:06:19.298 +03:30 [DBG] Connection id "0HN71AIE2GRIA" completed keep alive response.
+2024-09-30 18:06:19.302 +03:30 [INF] Request finished HTTP/1.1 GET http://localhost:5041/api/v1/RealEstate/similar-freetext?input=%D8%B3%DB%8C%D9%86 - 200 null application/json; charset=utf-8; x-api-version=1.0 5490.3393ms
+2024-09-30 18:09:49.879 +03:30 [INF] Request starting HTTP/1.1 GET http://localhost:5041/api/v1/RealEstate/similar-freetext?input=%D9%87%D8%B3%DB%8C%D9%86 - null null
+2024-09-30 18:09:49.905 +03:30 [DBG] 1 candidate(s) found for the request path '/api/v1/RealEstate/similar-freetext'
+2024-09-30 18:09:49.907 +03:30 [DBG] Endpoint 'RealEstateService.Controllers.V1.RealEstateController.GetSimilarTitlesFreetext (RealEstateService)' with route pattern 'api/v1/RealEstate/similar-freetext' is valid for the request path '/api/v1/RealEstate/similar-freetext'
+2024-09-30 18:09:49.912 +03:30 [DBG] Request matched endpoint 'RealEstateService.Controllers.V1.RealEstateController.GetSimilarTitlesFreetext (RealEstateService)'
+2024-09-30 18:09:49.916 +03:30 [DBG] Static files was skipped as the request already matched an endpoint.
+2024-09-30 18:09:49.918 +03:30 [DBG] Static files was skipped as the request already matched an endpoint.
+2024-09-30 18:09:49.921 +03:30 [INF] Executing endpoint 'RealEstateService.Controllers.V1.RealEstateController.GetSimilarTitlesFreetext (RealEstateService)'
+2024-09-30 18:09:49.945 +03:30 [INF] Route matched with {action = "GetSimilarTitlesFreetext", controller = "RealEstate"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[RealEstateCore.Models.RealEstate]]] GetSimilarTitlesFreetext(System.String) on controller RealEstateService.Controllers.V1.RealEstateController (RealEstateService).
+2024-09-30 18:09:49.950 +03:30 [DBG] Execution plan of authorization filters (in the following order): ["None"]
+2024-09-30 18:09:49.953 +03:30 [DBG] Execution plan of resource filters (in the following order): ["None"]
+2024-09-30 18:09:49.957 +03:30 [DBG] Execution plan of action filters (in the following order): ["Microsoft.AspNetCore.Mvc.ModelBinding.UnsupportedContentTypeFilter (Order: -3000)","Microsoft.AspNetCore.Mvc.Infrastructure.ModelStateInvalidFilter (Order: -2000)","Microsoft.AspNetCore.Mvc.ReportApiVersionsAttribute (Order: 0)","Microsoft.AspNetCore.Mvc.Versioning.ApplyContentTypeVersionActionFilter"]
+2024-09-30 18:09:49.962 +03:30 [DBG] Execution plan of exception filters (in the following order): ["None"]
+2024-09-30 18:09:49.966 +03:30 [DBG] Execution plan of result filters (in the following order): ["Microsoft.AspNetCore.Mvc.Infrastructure.ClientErrorResultFilter (Order: -2000)","Microsoft.AspNetCore.Mvc.ReportApiVersionsAttribute (Order: 0)"]
+2024-09-30 18:09:49.970 +03:30 [DBG] Executing controller factory for controller RealEstateService.Controllers.V1.RealEstateController (RealEstateService)
+2024-09-30 18:09:49.983 +03:30 [DBG] Executed controller factory for controller RealEstateService.Controllers.V1.RealEstateController (RealEstateService)
+2024-09-30 18:09:49.986 +03:30 [DBG] Attempting to bind parameter 'input' of type 'System.String' ...
+2024-09-30 18:09:49.989 +03:30 [DBG] Attempting to bind parameter 'input' of type 'System.String' using the name 'input' in request data ...
+2024-09-30 18:09:49.991 +03:30 [DBG] Done attempting to bind parameter 'input' of type 'System.String'.
+2024-09-30 18:09:49.993 +03:30 [DBG] Done attempting to bind parameter 'input' of type 'System.String'.
+2024-09-30 18:09:49.995 +03:30 [DBG] Attempting to validate the bound parameter 'input' of type 'System.String' ...
+2024-09-30 18:09:49.998 +03:30 [DBG] Done attempting to validate the bound parameter 'input' of type 'System.String'.
+2024-09-30 18:09:50.043 +03:30 [INF] Executing action method RealEstateService.Controllers.V1.RealEstateController.GetSimilarTitlesFreetext (RealEstateService) - Validation state: "Valid"
+2024-09-30 18:09:50.092 +03:30 [INF] Executed action method RealEstateService.Controllers.V1.RealEstateController.GetSimilarTitlesFreetext (RealEstateService), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 46.6843ms.
+2024-09-30 18:09:50.096 +03:30 [DBG] List of registered output formatters, in the following order: ["Microsoft.AspNetCore.Mvc.Formatters.HttpNoContentOutputFormatter","Microsoft.AspNetCore.Mvc.Formatters.StringOutputFormatter","Microsoft.AspNetCore.Mvc.Formatters.StreamOutputFormatter","Microsoft.AspNetCore.Mvc.Formatters.SystemTextJsonOutputFormatter"]
+2024-09-30 18:09:50.101 +03:30 [DBG] Attempting to select an output formatter based on Accept header '["text/plain; x-api-version=1.0"]'.
+2024-09-30 18:09:50.104 +03:30 [DBG] Could not find an output formatter based on content negotiation. Accepted types were (["text/plain; x-api-version=1.0"])
+2024-09-30 18:09:50.107 +03:30 [DBG] Attempting to select an output formatter without using a content type as no explicit content types were specified for the response.
+2024-09-30 18:09:50.109 +03:30 [DBG] Attempting to select the first formatter in the output formatters list which can write the result.
+2024-09-30 18:09:50.111 +03:30 [DBG] Selected output formatter 'Microsoft.AspNetCore.Mvc.Formatters.SystemTextJsonOutputFormatter' and content type 'application/json' to write the response.
+2024-09-30 18:09:50.114 +03:30 [INF] Executing OkObjectResult, writing value of type 'RealEstateCore.Models.ResponseModel`1[[System.Collections.Generic.IEnumerable`1[[RealEstateCore.Models.RealEstate, RealEstateCore, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2024-09-30 18:09:50.119 +03:30 [INF] Executed action RealEstateService.Controllers.V1.RealEstateController.GetSimilarTitlesFreetext (RealEstateService) in 148.8335ms
+2024-09-30 18:09:50.122 +03:30 [INF] Executed endpoint 'RealEstateService.Controllers.V1.RealEstateController.GetSimilarTitlesFreetext (RealEstateService)'
+2024-09-30 18:09:50.124 +03:30 [INF] HTTP GET /api/v1/RealEstate/similar-freetext responded 200 in 204.6933 ms
+2024-09-30 18:09:50.129 +03:30 [DBG] Connection id "0HN71AIE2GRIA" completed keep alive response.
+2024-09-30 18:09:50.132 +03:30 [INF] Request finished HTTP/1.1 GET http://localhost:5041/api/v1/RealEstate/similar-freetext?input=%D9%87%D8%B3%DB%8C%D9%86 - 200 null application/json; charset=utf-8; x-api-version=1.0 252.4158ms
+2024-09-30 18:11:59.046 +03:30 [INF] Request starting HTTP/1.1 GET http://localhost:5041/swagger/index.html - null null
+2024-09-30 18:11:59.144 +03:30 [DBG] No candidates found for the request path '/swagger/index.html'
+2024-09-30 18:11:59.146 +03:30 [DBG] Request did not match any endpoints
+2024-09-30 18:11:59.147 +03:30 [DBG] The request path /swagger/index.html does not match an existing file
+2024-09-30 18:11:59.150 +03:30 [DBG] Response markup is scheduled to include Browser Link script injection.
+2024-09-30 18:11:59.151 +03:30 [DBG] Response markup is scheduled to include browser refresh script injection.
+2024-09-30 18:11:59.153 +03:30 [DBG] Response markup was updated to include Browser Link script injection.
+2024-09-30 18:11:59.155 +03:30 [DBG] Response markup was updated to include browser refresh script injection.
+2024-09-30 18:11:59.157 +03:30 [DBG] Connection id "0HN71AIE2GRIA" completed keep alive response.
+2024-09-30 18:11:59.159 +03:30 [INF] Request finished HTTP/1.1 GET http://localhost:5041/swagger/index.html - 200 null text/html;charset=utf-8 113.3271ms
+2024-09-30 18:11:59.181 +03:30 [INF] Request starting HTTP/1.1 GET http://localhost:5041/swagger/index.js - null null
+2024-09-30 18:11:59.184 +03:30 [DBG] Connection id "0HN71AIE2GRIB" accepted.
+2024-09-30 18:11:59.208 +03:30 [DBG] No candidates found for the request path '/swagger/index.js'
+2024-09-30 18:11:59.211 +03:30 [DBG] Connection id "0HN71AIE2GRIB" started.
+2024-09-30 18:11:59.214 +03:30 [DBG] Request did not match any endpoints
+2024-09-30 18:11:59.214 +03:30 [DBG] Connection id "0HN71AIE2GRIC" accepted.
+2024-09-30 18:11:59.216 +03:30 [INF] Request starting HTTP/1.1 GET http://localhost:5041/_framework/aspnetcore-browser-refresh.js - null null
+2024-09-30 18:11:59.217 +03:30 [DBG] The request path /swagger/index.js does not match an existing file
+2024-09-30 18:11:59.228 +03:30 [DBG] Connection id "0HN71AIE2GRIC" started.
+2024-09-30 18:11:59.229 +03:30 [DBG] Connection id "0HN71AIE2GRIB" completed keep alive response.
+2024-09-30 18:11:59.231 +03:30 [DBG] Connection id "0HN71AIE2GRIA" completed keep alive response.
+2024-09-30 18:11:59.233 +03:30 [INF] Request starting HTTP/1.1 GET http://localhost:5041/_vs/browserLink - null null
+2024-09-30 18:11:59.235 +03:30 [INF] Request finished HTTP/1.1 GET http://localhost:5041/_framework/aspnetcore-browser-refresh.js - 200 13770 application/javascript; charset=utf-8 19.4978ms
+2024-09-30 18:11:59.237 +03:30 [INF] Request finished HTTP/1.1 GET http://localhost:5041/swagger/index.js - 200 null application/javascript;charset=utf-8 56.3923ms
+2024-09-30 18:11:59.264 +03:30 [DBG] Connection id "0HN71AIE2GRIC" completed keep alive response.
+2024-09-30 18:11:59.271 +03:30 [INF] Request finished HTTP/1.1 GET http://localhost:5041/_vs/browserLink - 200 null text/javascript; charset=UTF-8 37.8782ms
+2024-09-30 18:11:59.695 +03:30 [INF] Request starting HTTP/1.1 GET http://localhost:5041/swagger/v1/swagger.json - null null
+2024-09-30 18:11:59.702 +03:30 [DBG] No candidates found for the request path '/swagger/v1/swagger.json'
+2024-09-30 18:11:59.706 +03:30 [DBG] Request did not match any endpoints
+2024-09-30 18:11:59.708 +03:30 [DBG] The request path /swagger/v1/swagger.json does not match an existing file
+2024-09-30 18:11:59.713 +03:30 [INF] Request starting HTTP/1.1 GET http://localhost:5041/swagger/favicon-32x32.png - null null
+2024-09-30 18:11:59.719 +03:30 [DBG] No candidates found for the request path '/swagger/favicon-32x32.png'
+2024-09-30 18:11:59.722 +03:30 [DBG] Request did not match any endpoints
+2024-09-30 18:11:59.724 +03:30 [DBG] The request path /swagger/favicon-32x32.png does not match an existing file
+2024-09-30 18:11:59.738 +03:30 [INF] Sending file. Request path: '/favicon-32x32.png'. Physical path: 'N/A'
+2024-09-30 18:11:59.742 +03:30 [DBG] Connection id "0HN71AIE2GRIA" completed keep alive response.
+2024-09-30 18:11:59.742 +03:30 [DBG] Connection id "0HN71AIE2GRIC" completed keep alive response.
+2024-09-30 18:11:59.745 +03:30 [INF] Request finished HTTP/1.1 GET http://localhost:5041/swagger/favicon-32x32.png - 200 628 image/png 31.8997ms
+2024-09-30 18:11:59.747 +03:30 [INF] Request finished HTTP/1.1 GET http://localhost:5041/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 51.9573ms
+2024-09-30 18:17:16.650 +03:30 [DBG] Connection id "0HN71AIE2GRIB" received FIN.
+2024-09-30 18:17:16.700 +03:30 [DBG] Connection id "0HN71AIE2GRIA" received FIN.
+2024-09-30 18:17:16.925 +03:30 [DBG] Connection id "0HN71AIE2GRIB" disconnecting.
+2024-09-30 18:17:16.922 +03:30 [DBG] Connection id "0HN71AIE2GRIC" received FIN.
+2024-09-30 18:17:17.020 +03:30 [DBG] Connection id "0HN71AIE2GRIB" sending FIN because: "The Socket transport's send loop completed gracefully."
+2024-09-30 18:17:17.045 +03:30 [DBG] Connection id "0HN71AIE2GRIC" disconnecting.
+2024-09-30 18:17:17.014 +03:30 [DBG] Connection id "0HN71AIE2GRIA" disconnecting.
+2024-09-30 18:17:17.096 +03:30 [DBG] Connection id "0HN71AIE2GRIB" stopped.
+2024-09-30 18:17:17.098 +03:30 [DBG] Connection id "0HN71AIE2GRIC" sending FIN because: "The Socket transport's send loop completed gracefully."
+2024-09-30 18:17:17.105 +03:30 [DBG] Connection id "0HN71AIE2GRIA" sending FIN because: "The Socket transport's send loop completed gracefully."
+2024-09-30 18:17:17.122 +03:30 [DBG] Connection id "0HN71AIE2GRIA" stopped.
+2024-09-30 18:17:17.122 +03:30 [DBG] Connection id "0HN71AIE2GRIC" stopped.
+2024-09-30 18:20:43.074 +03:30 [DBG] Connection id "0HN71AIE2GRID" accepted.
+2024-09-30 18:20:43.077 +03:30 [DBG] Connection id "0HN71AIE2GRID" started.
+2024-09-30 18:20:43.101 +03:30 [INF] Request starting HTTP/1.1 GET http://localhost:5041/api/v1/RealEstate/similar-lucine?term=%D9%87%D8%B3%DB%8C%D9%86&pageNumber=1&pageSize=10&similarity=0.5 - null null
+2024-09-30 18:20:43.107 +03:30 [DBG] 1 candidate(s) found for the request path '/api/v1/RealEstate/similar-lucine'
+2024-09-30 18:20:43.132 +03:30 [DBG] Endpoint 'RealEstateService.Controllers.V1.RealEstateController.SearchFuzzy (RealEstateService)' with route pattern 'api/v1/RealEstate/similar-lucine' is valid for the request path '/api/v1/RealEstate/similar-lucine'
+2024-09-30 18:20:43.135 +03:30 [DBG] Request matched endpoint 'RealEstateService.Controllers.V1.RealEstateController.SearchFuzzy (RealEstateService)'
+2024-09-30 18:20:43.137 +03:30 [DBG] Static files was skipped as the request already matched an endpoint.
+2024-09-30 18:20:43.139 +03:30 [DBG] Static files was skipped as the request already matched an endpoint.
+2024-09-30 18:20:43.143 +03:30 [INF] Executing endpoint 'RealEstateService.Controllers.V1.RealEstateController.SearchFuzzy (RealEstateService)'
+2024-09-30 18:20:43.151 +03:30 [INF] Route matched with {action = "SearchFuzzy", controller = "RealEstate"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult SearchFuzzy(System.String, Int32, Int32, Double) on controller RealEstateService.Controllers.V1.RealEstateController (RealEstateService).
+2024-09-30 18:20:43.154 +03:30 [DBG] Execution plan of authorization filters (in the following order): ["None"]
+2024-09-30 18:20:43.157 +03:30 [DBG] Execution plan of resource filters (in the following order): ["None"]
+2024-09-30 18:20:43.161 +03:30 [DBG] Execution plan of action filters (in the following order): ["Microsoft.AspNetCore.Mvc.ModelBinding.UnsupportedContentTypeFilter (Order: -3000)","Microsoft.AspNetCore.Mvc.Infrastructure.ModelStateInvalidFilter (Order: -2000)","Microsoft.AspNetCore.Mvc.ReportApiVersionsAttribute (Order: 0)","Microsoft.AspNetCore.Mvc.Versioning.ApplyContentTypeVersionActionFilter"]
+2024-09-30 18:20:43.166 +03:30 [DBG] Execution plan of exception filters (in the following order): ["None"]
+2024-09-30 18:20:43.169 +03:30 [DBG] Execution plan of result filters (in the following order): ["Microsoft.AspNetCore.Mvc.Infrastructure.ClientErrorResultFilter (Order: -2000)","Microsoft.AspNetCore.Mvc.ReportApiVersionsAttribute (Order: 0)"]
+2024-09-30 18:20:43.172 +03:30 [DBG] Executing controller factory for controller RealEstateService.Controllers.V1.RealEstateController (RealEstateService)
+2024-09-30 18:20:43.182 +03:30 [DBG] Executed controller factory for controller RealEstateService.Controllers.V1.RealEstateController (RealEstateService)
+2024-09-30 18:20:43.185 +03:30 [DBG] Attempting to bind parameter 'term' of type 'System.String' ...
+2024-09-30 18:20:43.187 +03:30 [DBG] Attempting to bind parameter 'term' of type 'System.String' using the name 'term' in request data ...
+2024-09-30 18:20:43.190 +03:30 [DBG] Done attempting to bind parameter 'term' of type 'System.String'.
+2024-09-30 18:20:43.193 +03:30 [DBG] Done attempting to bind parameter 'term' of type 'System.String'.
+2024-09-30 18:20:43.195 +03:30 [DBG] Attempting to validate the bound parameter 'term' of type 'System.String' ...
+2024-09-30 18:20:43.199 +03:30 [DBG] Done attempting to validate the bound parameter 'term' of type 'System.String'.
+2024-09-30 18:20:43.202 +03:30 [DBG] Attempting to bind parameter 'pageNumber' of type 'System.Int32' ...
+2024-09-30 18:20:43.204 +03:30 [DBG] Attempting to bind parameter 'pageNumber' of type 'System.Int32' using the name 'pageNumber' in request data ...
+2024-09-30 18:20:43.208 +03:30 [DBG] Done attempting to bind parameter 'pageNumber' of type 'System.Int32'.
+2024-09-30 18:20:43.211 +03:30 [DBG] Done attempting to bind parameter 'pageNumber' of type 'System.Int32'.
+2024-09-30 18:20:43.214 +03:30 [DBG] Attempting to validate the bound parameter 'pageNumber' of type 'System.Int32' ...
+2024-09-30 18:20:43.218 +03:30 [DBG] Done attempting to validate the bound parameter 'pageNumber' of type 'System.Int32'.
+2024-09-30 18:20:43.221 +03:30 [DBG] Attempting to bind parameter 'pageSize' of type 'System.Int32' ...
+2024-09-30 18:20:43.224 +03:30 [DBG] Attempting to bind parameter 'pageSize' of type 'System.Int32' using the name 'pageSize' in request data ...
+2024-09-30 18:20:43.229 +03:30 [DBG] Done attempting to bind parameter 'pageSize' of type 'System.Int32'.
+2024-09-30 18:20:43.233 +03:30 [DBG] Done attempting to bind parameter 'pageSize' of type 'System.Int32'.
+2024-09-30 18:20:43.236 +03:30 [DBG] Attempting to validate the bound parameter 'pageSize' of type 'System.Int32' ...
+2024-09-30 18:20:43.239 +03:30 [DBG] Done attempting to validate the bound parameter 'pageSize' of type 'System.Int32'.
+2024-09-30 18:20:43.243 +03:30 [DBG] Attempting to bind parameter 'similarity' of type 'System.Double' ...
+2024-09-30 18:20:43.251 +03:30 [DBG] Attempting to bind parameter 'similarity' of type 'System.Double' using the name 'similarity' in request data ...
+2024-09-30 18:20:43.256 +03:30 [DBG] Done attempting to bind parameter 'similarity' of type 'System.Double'.
+2024-09-30 18:20:43.260 +03:30 [DBG] Done attempting to bind parameter 'similarity' of type 'System.Double'.
+2024-09-30 18:20:43.269 +03:30 [DBG] Attempting to validate the bound parameter 'similarity' of type 'System.Double' ...
+2024-09-30 18:20:43.272 +03:30 [DBG] Done attempting to validate the bound parameter 'similarity' of type 'System.Double'.
+2024-09-30 18:20:43.347 +03:30 [INF] Executing action method RealEstateService.Controllers.V1.RealEstateController.SearchFuzzy (RealEstateService) - Validation state: "Valid"
+2024-09-30 18:20:45.681 +03:30 [INF] Executed action method RealEstateService.Controllers.V1.RealEstateController.SearchFuzzy (RealEstateService), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 2330.5924ms.
+2024-09-30 18:20:45.685 +03:30 [DBG] List of registered output formatters, in the following order: ["Microsoft.AspNetCore.Mvc.Formatters.HttpNoContentOutputFormatter","Microsoft.AspNetCore.Mvc.Formatters.StringOutputFormatter","Microsoft.AspNetCore.Mvc.Formatters.StreamOutputFormatter","Microsoft.AspNetCore.Mvc.Formatters.SystemTextJsonOutputFormatter"]
+2024-09-30 18:20:45.690 +03:30 [DBG] No information found on request to perform content negotiation.
+2024-09-30 18:20:45.692 +03:30 [DBG] Attempting to select an output formatter without using a content type as no explicit content types were specified for the response.
+2024-09-30 18:20:45.694 +03:30 [DBG] Attempting to select the first formatter in the output formatters list which can write the result.
+2024-09-30 18:20:45.695 +03:30 [DBG] Selected output formatter 'Microsoft.AspNetCore.Mvc.Formatters.SystemTextJsonOutputFormatter' and content type 'application/json' to write the response.
+2024-09-30 18:20:45.698 +03:30 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[RealEstateCore.Models.RealEstate, RealEstateCore, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2024-09-30 18:20:45.708 +03:30 [INF] Executed action RealEstateService.Controllers.V1.RealEstateController.SearchFuzzy (RealEstateService) in 2536.1698ms
+2024-09-30 18:20:45.713 +03:30 [INF] Executed endpoint 'RealEstateService.Controllers.V1.RealEstateController.SearchFuzzy (RealEstateService)'
+2024-09-30 18:20:45.715 +03:30 [INF] HTTP GET /api/v1/RealEstate/similar-lucine responded 200 in 2574.2327 ms
+2024-09-30 18:20:45.720 +03:30 [DBG] Connection id "0HN71AIE2GRID" completed keep alive response.
+2024-09-30 18:20:45.723 +03:30 [INF] Request finished HTTP/1.1 GET http://localhost:5041/api/v1/RealEstate/similar-lucine?term=%D9%87%D8%B3%DB%8C%D9%86&pageNumber=1&pageSize=10&similarity=0.5 - 200 null application/json; charset=utf-8; x-api-version=1.0 2622.0893ms
+2024-09-30 18:26:20.126 +03:30 [DBG] Connection id "0HN71AIE2GRID" received FIN.
+2024-09-30 18:26:20.165 +03:30 [DBG] Connection id "0HN71AIE2GRID" disconnecting.
+2024-09-30 18:26:20.169 +03:30 [DBG] Connection id "0HN71AIE2GRID" sending FIN because: "The Socket transport's send loop completed gracefully."
+2024-09-30 18:26:20.174 +03:30 [DBG] Connection id "0HN71AIE2GRID" stopped.

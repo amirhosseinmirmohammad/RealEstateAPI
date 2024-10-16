@@ -2,26 +2,65 @@
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using RealEstateApplication.ViewModels;
 using RealEstateCore.Enums;
 using RealEstateCore.Interfaces.V1;
 using RealEstateCore.Models;
-using RealEstateService.ViewModels;
 using System.Data;
-
+using RealEstateApplication.Services.Helpers;
 namespace RealEstateApplication.Services.V1
 {
     public class RealEstatesService
     {
         public RealEstatesService(IRealEstateRepository repository,
                                   ILogger<RealEstatesService> logger,
-                                  IOptions<DatabaseSettings> dbSettings)
+                                  IOptions<DatabaseSettings> dbSettings,
+                                  ILuceneEngine<RealEstate> luceneEngine) 
         {
             _repository = repository;
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
-            _connectionString = dbSettings.Value.RealEstateConnection; 
+            _connectionString = dbSettings.Value.RealEstateConnection;
+            _luceneEngine = luceneEngine ?? throw new ArgumentNullException(nameof(luceneEngine));
         }
 
-        public async Task<ResponseModel<IEnumerable<RealEstate>>> GetSimilarTitlesAsync(string input)
+        public async Task<ResponseModel<RealEstate>> GetRealEstateByIdAsync(int id)
+        {
+            try
+            {
+                var realEstate = await _repository.GetRealEstateByIdAsync(id);
+                if (realEstate != null)
+                {
+                    _logger.LogInformation("RealEstate with ID {RealEstateId}", id);
+
+                    return new ResponseModel<RealEstate>
+                    {
+                        StatusCode = (int)ResponseStatus.Success,
+                        Data = realEstate,
+                        Message = "Real estate retrieved successfully"
+                    };
+                }
+
+                return new ResponseModel<RealEstate>
+                {
+                    StatusCode = (int)ResponseStatus.NotFound,
+                    Data = null,
+                    Message = "Real estate not found"
+                };
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error retrieving real estate");
+                return new ResponseModel<RealEstate>
+                {
+                    StatusCode = (int)ResponseStatus.ServerError,
+                    Data = null,
+                    Message = "Error retrieving real estate",
+                    Exception = ex.Message
+                };
+            }
+        }
+
+        public async Task<ResponseModel<IEnumerable<RealEstate>>> GetSimilarTitlesWithFunctionAsync(string input)
         {
             if (string.IsNullOrWhiteSpace(input))
             {
@@ -29,26 +68,24 @@ namespace RealEstateApplication.Services.V1
                 {
                     StatusCode = (int)ResponseStatus.ServerError,
                     Message = "Input cannot be empty.",
-                    Data = null
                 };
             }
 
             using (IDbConnection db = new SqlConnection(_connectionString))
             {
                 string query = @"
-        WITH Similarity AS (
-            SELECT Title, 
-                   100 * (1 - CAST(dbo.LevenshteinPersian(Title, @Input) AS FLOAT) / 
-                       CASE 
-                           WHEN LEN(Title) > LEN(@Input) THEN LEN(Title)
-                           ELSE LEN(@Input)
-                       END) AS SimilarityPercentage
-            FROM [dbo].[RealEstates]
-        )
-        SELECT Title, SimilarityPercentage
-        FROM Similarity
-        WHERE SimilarityPercentage >= 50;
-        ";
+                                WITH Similarity AS (
+                                    SELECT Title, 
+                                           100 * (1 - CAST(dbo.LevenshteinPersian(Title, @Input) AS FLOAT) / 
+                                               CASE 
+                                                   WHEN LEN(Title) > LEN(@Input) THEN LEN(Title)
+                                                   ELSE LEN(@Input)
+                                               END) AS SimilarityPercentage
+                                    FROM [dbo].[RealEstates]
+                                )
+                                SELECT Title
+                                FROM Similarity
+                                WHERE SimilarityPercentage >= 50;";
 
                 var result = await db.QueryAsync<RealEstate>(query, new { Input = input });
 
@@ -61,6 +98,44 @@ namespace RealEstateApplication.Services.V1
             }
         }
 
+        public async Task<ResponseModel<IEnumerable<RealEstate>>> GetSimilarTitlesWithFreeText(string input)
+        {
+            var response = new ResponseModel<IEnumerable<RealEstate>>();
+
+            if (string.IsNullOrWhiteSpace(input))
+            {
+                response.StatusCode = (int)ResponseStatus.NotFound;
+                response.Message = "Input search term cannot be empty.";
+                return response;
+            }
+
+            try
+            {
+                using (var connection = new SqlConnection(_connectionString))
+                {
+                    string query = @"
+                                SELECT * 
+                                FROM RealEstates 
+                                WHERE FREETEXT(Title, @Input) 
+                                OR Title LIKE '%' + @Input + '%'";
+
+                    var result = await connection.QueryAsync<RealEstate>(query, new { Input = input });
+
+                    response.StatusCode = (int)ResponseStatus.Success;
+                    response.Data = result;
+                    response.Message = "Data fetched successfully.";
+                }
+            }
+            catch (Exception ex)
+            {
+                response.StatusCode = (int)ResponseStatus.ServerError;
+                response.Message = "An error occurred while searching for similar titles.";
+                response.Exception = ex.Message;
+            }
+
+            return response;
+        }
+
         public async Task<ResponseModel<int>> AddRealEstateAsync(RealEstateViewModel viewModel)
         {
             try
@@ -71,12 +146,17 @@ namespace RealEstateApplication.Services.V1
                     Status = viewModel.Status,
                     Price = viewModel.Price,
                     Floor = viewModel.Floor,
-                    UserId = "UserId",
+                    UserId = "UserId", // Set to the actual user ID
                     CreatedAt = DateTime.UtcNow,
                     UpdatedAt = DateTime.UtcNow
                 };
 
+                // Use the generic type directly
                 var id = await _repository.AddRealEstateAsync(realEstate);
+
+                // Add index using the generic type
+                _luceneEngine.AddIndex(realEstate); 
+
                 return new ResponseModel<int>
                 {
                     StatusCode = (int)ResponseStatus.Success,
@@ -114,6 +194,7 @@ namespace RealEstateApplication.Services.V1
                     });
 
                     await _repository.UpdateRealEstateAsync(realEstate);
+
                     _logger.LogInformation("Archived RealEstate with ID {RealEstateId}", id);
 
                     return new ResponseModel<int>
@@ -160,6 +241,9 @@ namespace RealEstateApplication.Services.V1
                     });
 
                     await _repository.UpdateRealEstateAsync(realEstate);
+
+                    _luceneEngine.UpdateIndex(realEstate, "title"); // Update Lucene index
+
                     _logger.LogInformation("Updated time for RealEstate with ID {RealEstateId}", id);
 
                     return new ResponseModel<int>
@@ -218,5 +302,6 @@ namespace RealEstateApplication.Services.V1
         private readonly string _connectionString;
         private readonly IRealEstateRepository _repository;
         private readonly ILogger<RealEstatesService> _logger;
+        private readonly ILuceneEngine<RealEstate> _luceneEngine; 
     }
 }

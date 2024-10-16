@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
-using RealEstateCore.Enums;
 using RealEstateCore.Interfaces.V1;
 using RealEstateCore.Models;
 
